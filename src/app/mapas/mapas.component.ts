@@ -2,11 +2,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import * as L from "leaflet";
 import { MapasService } from "./mapas.service";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-mapas",
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: "./mapas.component.html",
 })
 export class MapasComponent implements OnInit {
@@ -70,8 +71,8 @@ export class MapasComponent implements OnInit {
   private actualizarMapaEnVista(lat: number, lon: number): void {
     if (this.mapa) {
       const myIcon = L.icon({
-        iconUrl: "../../assets/marker-icon.png",
-        shadowUrl: "../../assets/marker-shadow.png",
+        iconUrl: "/marker-icon.png",
+        shadowUrl: "/marker-shadow.png",
       });
 
       L.marker([lat, lon], { icon: myIcon }).addTo(this.mapa);

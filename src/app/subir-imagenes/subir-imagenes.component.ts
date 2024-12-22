@@ -1,14 +1,14 @@
 import { Component } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
 import { SubirImagenesService } from "./subir-imagenes.service";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-subir-imagenes",
   standalone: true,
-  imports: [HttpClientModule, CommonModule, FormsModule,],
+  imports: [HttpClientModule, CommonModule, FormsModule, TranslatePipe],
   templateUrl: "./subir-imagenes.component.html",
   styleUrls: ["./subir-imagenes.component.scss"],
 })
@@ -17,7 +17,7 @@ export class SubirImagenesComponent {
   selectedFile: File | null = null;
   mensaje: string = "";
 
-  constructor(private http: HttpClient, private imageUrl : SubirImagenesService) { }
+  constructor(private imageUrl : SubirImagenesService) { }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;

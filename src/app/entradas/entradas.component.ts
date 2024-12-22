@@ -6,11 +6,12 @@ import { FilterEntradasComponent } from '../filter-entradas/filter-entradas.comp
 import { BotonAtrasComponent } from '../boton-atras/boton-atras.component'
 import { VersionService } from '../version/version.service'
 import { MapasService } from '../mapas/mapas.service'
+import { TranslatePipe } from '@ngx-translate/core'
 
 @Component({
   selector: 'app-entradas',
   standalone: true,
-  imports: [CommonModule, FilterEntradasComponent, BotonAtrasComponent],
+  imports: [CommonModule, FilterEntradasComponent, BotonAtrasComponent, TranslatePipe],
   templateUrl: './entradas.component.html',
   providers: [DatePipe],
 })

@@ -1,19 +1,21 @@
 <div class="m-2 max-w-screen-md">
   <form (ngSubmit)="handleEntradasFilter()">
     <div class="rounded-xl border border-gray-200 bg-white p-6 shadow-lg">
-      <h2 class="text-xl font-bold text-stone-700">Filtros</h2>
+      <h2 class="text-xl font-bold text-stone-700">
+        {{ "FILTROS" | translate }}
+      </h2>
       <div
         class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
       >
         <div class="flex flex-col">
-          <label for="nombre" class="text-sm font-medium text-stone-600"
-            >Nombre</label
-          >
+          <label for="nombre" class="text-sm font-medium text-stone-600">{{
+            "NOMBRE" | translate
+          }}</label>
           <input
             type="text"
             id="nombre"
             name="nombre"
-            placeholder="nombre de la entrada"
+            [placeholder]="'NOMBRE_DE_LA_ENTRADA' | translate"
             (keydown.enter)="onEnter($event)"
             class="mt-2 block w-full rounded-md border border-gray-200 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
             [(ngModel)]="filtro.nombre"
@@ -21,14 +23,14 @@
         </div>
 
         <div class="flex flex-col">
-          <label for="usuario" class="text-sm font-medium text-stone-600"
-            >Usuario</label
-          >
+          <label for="usuario" class="text-sm font-medium text-stone-600">{{
+            "USUARIO" | translate
+          }}</label>
           <input
             type="text"
             id="usuario"
             name="usuario"
-            placeholder="nombre del usuario"
+            [placeholder]="'NOMBRE_DEL_USUARIO' | translate"
             (keydown.enter)="onEnter($event)"
             class="mt-2 block w-full rounded-md border border-gray-200 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
             [(ngModel)]="filtro.autor"
@@ -36,8 +38,10 @@
         </div>
 
         <div class="flex flex-col">
-          <label for="fechaCreacion" class="text-sm font-medium text-stone-600"
-            >Fecha de creación</label
+          <label
+            for="fechaCreacion"
+            class="text-sm font-medium text-stone-600"
+            >{{ "FECHA_DE_CREACION" | translate }}</label
           >
           <input
             type="date"
@@ -55,13 +59,13 @@
           (click)="resetFilters()"
           class="rounded-lg bg-gray-200 px-8 py-2 font-medium text-gray-600 outline-none hover:opacity-90 focus:ring active:scale-95"
         >
-          Restablecer
+          {{ "RESTABLECER" | translate }}
         </button>
         <button
           type="submit"
           class="rounded-lg bg-blue-600 px-8 py-2 font-medium text-white outline-none hover:opacity-90 focus:ring active:scale-95"
         >
-          Buscar
+          {{ "BUSCAR" | translate }}
         </button>
       </div>
     </div>

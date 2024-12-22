@@ -3,11 +3,12 @@ import { ValoracionesService } from './valoraciones.service';
 import { UsuarioService } from '../usuario/usuario.service';
 import { forkJoin } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-valoraciones',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './valoraciones.component.html'
 })
 export class ValoracionesComponent implements OnInit {

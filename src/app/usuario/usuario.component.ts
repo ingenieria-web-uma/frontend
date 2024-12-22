@@ -4,11 +4,12 @@ import { UsuarioService } from './usuario.service';
 import { ValoracionesComponent } from '../valoraciones/valoraciones.component';
 import { CommonModule } from '@angular/common';
 import { NewValoracionComponent } from "../new-valoracion/new-valoracion.component";
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-usuario',
   standalone: true,
-  imports: [CommonModule, ValoracionesComponent, NewValoracionComponent],
+  imports: [CommonModule, ValoracionesComponent, NewValoracionComponent, TranslatePipe],
   templateUrl: './usuario.component.html'
 })
 export class UsuarioComponent implements OnInit {

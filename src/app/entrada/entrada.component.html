@@ -15,14 +15,14 @@
         (click)="verVersiones()"
         class="rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600"
       >
-        Historial de versiones
+        {{ "HISTORIAL_DE_VERSIONES" | translate }}
       </button>
     </div>
   </div>
 
   <div class="flex justify-between text-sm text-gray-600">
     <div class="flex items-center space-x-2">
-      <span class="font-semibold">Usuario:</span>
+      <span class="font-semibold">{{ "USUARIO:" | translate }}</span>
       <a
         [routerLink]="['/usuario', idUsuario]"
         class="text-gray-700 transition duration-200 hover:text-gray-900 hover:underline"
@@ -32,7 +32,7 @@
     </div>
 
     <div class="flex items-center space-x-2">
-      <span class="font-semibold">Fecha de creación:</span>
+      <span class="font-semibold">{{ "FECHA_DE_CREACION:" | translate }}</span>
       <span>{{ fechaCreacion | date: "dd MMMM yyyy" }}</span>
     </div>
   </div>

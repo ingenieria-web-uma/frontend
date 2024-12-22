@@ -9,11 +9,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-comentarios",
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: "./comentarios.component.html",
   providers: [DatePipe],
 })

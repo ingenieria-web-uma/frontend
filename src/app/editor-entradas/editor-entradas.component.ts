@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { NgIf } from "@angular/common";
 import { EditorComponent, TINYMCE_SCRIPT_SRC } from "@tinymce/tinymce-angular";
 import { SubirImagenesService } from "./subirImagen.service";
@@ -13,8 +13,7 @@ import { HttpClient } from "@angular/common/http";
   providers: [
     { provide: TINYMCE_SCRIPT_SRC, useValue: "tinymce/tinymce.min.js" },
   ],
-  templateUrl: "./editor-entradas.component.html",
-  styleUrl: "./editor-entradas.component.scss",
+  templateUrl: "./editor-entradas.component.html"
 })
 export class EditorEntradasComponent implements OnInit {
   loading = true;
@@ -93,9 +92,8 @@ export class EditorEntradasComponent implements OnInit {
 
   imageUploadHandler = (
     blobInfo: any,
-    progress: (percent: number) => void,
   ): Promise<string> => {
-    return new Promise<string>((resolve, reject) => {
+    return new Promise<string>((resolve) => {
       const archivo = blobInfo.blob(); // Convertir a tipo File
 
       this.subirImagenesService.subirImagen(archivo).subscribe({
@@ -123,6 +121,7 @@ export class EditorEntradasComponent implements OnInit {
   }
 
   init: EditorComponent["init"] = {
+    language: 'es',
     license_key: "gpl",
     height: "100vh",
     plugins: "lists link image table code help wordcount",

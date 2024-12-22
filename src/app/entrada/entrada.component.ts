@@ -9,6 +9,7 @@ import { MapasService } from "../mapas/mapas.service";
 import { MapasComponent } from "../mapas/mapas.component";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { UsuarioService } from "../usuario/usuario.service";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-entrada",
@@ -19,7 +20,8 @@ import { UsuarioService } from "../usuario/usuario.service";
     BotonEditarComponent,
     ComentariosComponent,
     MapasComponent,
-    RouterModule
+    RouterModule,
+    TranslatePipe
 ],
   templateUrl: "./entrada.component.html",
 })
@@ -87,7 +89,7 @@ export class EntradaComponent implements OnInit {
       },
       error: (err) => {
         console.error("Error al obtener el usuario:", err);
-        this.nombreUsuario = "Desconocido";
+        this.nombreUsuario = 'Desconocido';
       },
     });
   }

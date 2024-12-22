@@ -11,11 +11,12 @@ import { NewEntradaService } from './new-entrada.service';
 import { NewVersionComponent } from '../new-version/new-version.component';
 import { MapasComponent } from "../mapas/mapas.component";
 import { BotonAtrasComponent } from "../boton-atras/boton-atras.component";
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-new-entrada',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NewVersionComponent, MapasComponent, BotonAtrasComponent],
+  imports: [CommonModule, ReactiveFormsModule, NewVersionComponent, MapasComponent, BotonAtrasComponent, TranslatePipe],
   templateUrl: './new-entrada.component.html',
 })
 export class NewEntradaComponent {

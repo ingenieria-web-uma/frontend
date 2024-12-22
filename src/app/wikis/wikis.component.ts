@@ -4,11 +4,12 @@ import { WikisService } from "./wikis.service";
 import { Router } from "@angular/router";
 import { BarraBusquedaComponent } from "../barra-busqueda/barra-busqueda.component";
 import { BotonEditarComponent } from "../boton-editar/boton-editar.component";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-wikis",
   standalone: true,
-  imports: [CommonModule, BarraBusquedaComponent, BotonEditarComponent],
+  imports: [CommonModule, BarraBusquedaComponent, BotonEditarComponent, TranslatePipe],
   templateUrl: "./wikis.component.html",
 })
 export class WikisComponent implements OnInit {

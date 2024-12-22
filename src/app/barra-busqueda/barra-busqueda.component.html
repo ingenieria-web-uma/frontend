@@ -5,7 +5,7 @@
         type="search"
         [(ngModel)]="textoBusqueda"
         (input)="onSearchChange()"
-        placeholder="Buscar..."
+        [placeholder]="'BUSCAR_ELIPSIS' | translate"
         class="flex-grow rounded-l-md border border-gray-200 px-2 py-2 shadow-sm outline-none focus:border-blue-500 focus:ring-inset focus:ring-blue-200 focus:ring-opacity-50"
       />
       <button

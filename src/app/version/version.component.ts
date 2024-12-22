@@ -2,13 +2,13 @@ import { Component, Input, OnInit } from "@angular/core";
 import { VersionService } from "./version.service";
 import { CommonModule } from "@angular/common";
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser";
-import { HttpClient } from "@angular/common/http";
-import { ActivatedRoute, Router } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
+import { TranslateDirective } from "@ngx-translate/core";
 
 @Component({
   selector: "app-version",
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TranslateDirective],
   templateUrl: "./version.component.html",
 })
 export class VersionComponent implements OnInit {
@@ -20,10 +20,8 @@ export class VersionComponent implements OnInit {
   fechaEdicion: Date = new Date();
 
   constructor(
-    private http: HttpClient,
     private versionService: VersionService,
     private route: ActivatedRoute,
-    private router: Router,
     private sanatizer: DomSanitizer,
   ) { }
 

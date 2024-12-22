@@ -1,11 +1,12 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NewVersionService } from './new-version.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-new-version',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TranslatePipe],
   templateUrl: './new-version.component.html',
 })
 export class NewVersionComponent implements OnInit {

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { PerfilService } from './perfil.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule, TranslatePipe],
   templateUrl: './perfil.component.html',
 })
 export class PerfilComponent implements OnInit {

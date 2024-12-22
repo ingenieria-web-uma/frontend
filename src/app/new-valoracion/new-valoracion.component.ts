@@ -2,11 +2,12 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ValoracionesService } from '../valoraciones/valoraciones.service';
 import { CommonModule } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-new-valoracion',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: './new-valoracion.component.html',
 })
 export class NewValoracionComponent {

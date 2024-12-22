@@ -6,11 +6,12 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { BotonAtrasComponent } from "../boton-atras/boton-atras.component";
 import { SubirImagenesComponent } from "../subir-imagenes/subir-imagenes.component";  // Importa FormsModule
 import { SubirImagenesService } from '../subir-imagenes/subir-imagenes.service';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-editar-wiki',
   standalone: true,
-  imports: [CommonModule, FormsModule, BotonAtrasComponent, SubirImagenesComponent,ReactiveFormsModule], // Asegúrate de incluir FormsModule aquí
+  imports: [CommonModule, FormsModule, BotonAtrasComponent, SubirImagenesComponent,ReactiveFormsModule, TranslatePipe], // Asegúrate de incluir FormsModule aquí
   templateUrl: './editar-wiki.component.html',
 })
 export class EditorWikiComponent implements OnInit {
@@ -63,7 +64,7 @@ export class EditorWikiComponent implements OnInit {
       this.WikisService.editWiki(this.wikiId, wikiData).subscribe({
         next: (data) => {
           console.log('Cambios guardados:', data);
-          
+
           this.router.navigate(['/']);
         },
         error: (err) => {

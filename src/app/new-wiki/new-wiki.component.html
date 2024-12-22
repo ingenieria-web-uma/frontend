@@ -1,8 +1,10 @@
 <div class="container mx-auto mt-4">
-  <h1 class="mb-4 text-2xl font-bold">Crear wiki</h1>
+  <h1 class="mb-4 text-2xl font-bold">{{ "CREAR_WIKI" | translate }}</h1>
   <form [formGroup]="wikiForm" (ngSubmit)="crearWiki()">
     <div class="mb-4">
-      <label for="nombre" class="block text-gray-700">Nombre</label>
+      <label for="nombre" class="block text-gray-700">{{
+        "NOMBRE" | translate
+      }}</label>
       <input
         type="text"
         id="nombre"
@@ -18,7 +20,7 @@
         type="submit"
         class="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
       >
-        Crear
+        {{ "CREAR" | translate }}
       </button>
     </div>
   </form>

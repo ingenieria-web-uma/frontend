@@ -6,12 +6,12 @@
     }}</span>
   </div>
   <div class="desplegable" *ngIf="mostrarDesplegable">
-    <h3 class="titulo">Notificaciones</h3>
+    <h3 class="titulo">{{ "NOTIFICACIONES" | translate }}</h3>
     <button
       class="limpiar-notificaciones text-red-600"
       (click)="limpiarNotificaciones()"
     >
-      Limpiar
+      {{ "LIMPIAR" | translate }}
     </button>
     <div class="filtros">
       <button
@@ -19,7 +19,7 @@
         [class.active]="filtroActual === 'todas'"
         (click)="filtrarNotificaciones('todas')"
       >
-        Todas
+        {{ "TODAS" | translate }}
       </button>
       <div class="fila-inferior">
         <button
@@ -27,7 +27,7 @@
           [class.active]="filtroActual === 'pendientes'"
           (click)="filtrarNotificaciones('pendientes')"
         >
-          Pendientes
+          {{ "PENDIENTES" | translate }}
         </button>
         <div class="separador"></div>
         <button
@@ -35,7 +35,7 @@
           [class.active]="filtroActual === 'leidas'"
           (click)="filtrarNotificaciones('leidas')"
         >
-          Leídas
+          {{ "LEIDAS" | translate }}
         </button>
       </div>
     </div>
@@ -67,20 +67,20 @@
             class="marcar-leido"
             (click)="marcarComoLeida(notificacion, $event)"
           >
-            Marcar como leído
+            {{ "MARCAR_COMO_LEIDO" | translate }}
           </button>
           <button
             *ngIf="notificacion.is_read"
             class="marcar-no-leido"
             (click)="marcarComoNoLeida(notificacion, $event)"
           >
-            Marcar como no leído
+            {{ "MARCAR_COMO_NO_LEIDO" | translate }}
           </button>
         </li>
       </ul>
     </ng-container>
     <ng-template #noNotificaciones>
-      <div class="no-notificaciones">No hay notificaciones</div>
+      <div class="no-notificaciones">{{ "NO_NOTIFICACIONES" | translate }}</div>
     </ng-template>
   </div>
 </div>

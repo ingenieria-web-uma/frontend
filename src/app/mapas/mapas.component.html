@@ -6,7 +6,7 @@
           <input
             #searchInput
             type="text"
-            placeholder="Buscar ubicación"
+            [placeholder]="'BUSCAR_UBICACION' | translate"
             class="flex-grow rounded-l-md border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
             (keyup.enter)="buscar(searchInput.value)"
           />

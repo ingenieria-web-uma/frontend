@@ -1,16 +1,17 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NotificacionesService } from './notificaciones.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-notificaciones',
   standalone: true,
+  imports: [CommonModule, TranslatePipe],
   templateUrl: './notificaciones.component.html',
   styleUrls: ['./notificaciones.component.scss'],
-  imports: [CommonModule],
 })
 export class NotificacionesComponent implements OnInit {
   notificaciones: any[] = [];

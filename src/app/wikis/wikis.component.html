@@ -8,7 +8,7 @@
     (click)="crearWiki()"
     class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
   >
-    Crear wiki
+    {{ "CREAR_WIKI" | translate }}
   </button>
 </div>
 
@@ -28,7 +28,7 @@
             </h2>
             <img
               [src]="wiki.imagenUrl"
-              alt="Imagen de la wiki"
+              [alt]="'IMAGEN_WIKI' | translate"
               class="h-32 w-32 rounded-md object-cover"
             />
           </div>
@@ -40,13 +40,13 @@
               (click)="$event.stopPropagation(); borrarWiki(wiki.id)"
               class="rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600"
             >
-              Borrar
+              {{ "BORRAR" | translate }}
             </button>
           </div>
         </li>
       }
     </ul>
   } @else {
-    <h2 class="text-center text-gray-500">No se encontraron resultados</h2>
+    <h2 class="text-center text-gray-500">{{ "NO_RESULTADOS" | translate }}</h2>
   }
 </div>

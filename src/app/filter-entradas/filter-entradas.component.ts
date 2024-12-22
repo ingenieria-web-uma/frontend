@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Output } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
   selector: "app-filter-entradas",
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, TranslatePipe],
   templateUrl: "./filter-entradas.component.html"
 })
 export class FilterEntradasComponent {

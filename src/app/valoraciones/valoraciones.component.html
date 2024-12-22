@@ -1,8 +1,10 @@
 <div class="mx-auto mt-4 max-w-3xl">
-  <h2 class="mb-4 text-xl font-semibold text-gray-800">Valoraciones</h2>
+  <h2 class="mb-4 text-xl font-semibold text-gray-800">
+    {{ "VALORACIONES" | translate }}
+  </h2>
 
   <div *ngIf="valoraciones.length === 0" class="text-center text-gray-600">
-    <p>Ninguna valoración aún</p>
+    <p>{{ "NO_VALORACION" | translate }}</p>
   </div>
 
   <ul *ngIf="valoraciones.length > 0" class="space-y-4">

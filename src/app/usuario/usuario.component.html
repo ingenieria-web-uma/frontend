@@ -14,7 +14,9 @@
   </div>
 
   <div class="mt-4">
-    <p class="text-lg font-semibold text-gray-700">Reputación</p>
+    <p class="text-lg font-semibold text-gray-700">
+      {{ "REPUTACION" | translate }}
+    </p>
     <div class="mt-1 flex items-center text-yellow-400">
       <i *ngFor="let estrella of estrellas" [class]="estrella"></i>
       <span class="ml-2 text-sm text-gray-700">

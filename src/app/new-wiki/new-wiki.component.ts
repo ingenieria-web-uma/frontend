@@ -5,11 +5,12 @@ import { NewWikiService } from './new-wiki.service';
 import { SubirImagenesService } from '../subir-imagenes/subir-imagenes.service'; // Importa el servicio
 import { BotonAtrasComponent } from "../boton-atras/boton-atras.component";
 import { SubirImagenesComponent } from "../subir-imagenes/subir-imagenes.component";
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-new-wiki',
   standalone: true,
-  imports: [ReactiveFormsModule, BotonAtrasComponent, SubirImagenesComponent],
+  imports: [ReactiveFormsModule, BotonAtrasComponent, SubirImagenesComponent, TranslatePipe],
   templateUrl: './new-wiki.component.html',
 })
 export class NewWikiComponent {

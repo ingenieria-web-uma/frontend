@@ -2,7 +2,7 @@
   <form [formGroup]="valoracionForm" (ngSubmit)="enviarValoracion()">
     <div class="mb-6">
       <label for="nota" class="block text-lg font-medium text-gray-700">
-        Valoración
+        {{ "VALORACION" | translate }}
       </label>
       <div class="mt-2 flex items-center justify-center space-x-2">
         <ng-container *ngFor="let i of [1, 2, 3, 4, 5]">
@@ -26,7 +26,7 @@
         "
         class="mt-2 text-center text-sm text-red-500"
       >
-        Por favor selecciona una valoración entre 1 y 5.
+        {{ "SELECCIONA_VALORACION" | translate }}
       </div>
     </div>
 
@@ -40,7 +40,7 @@
         [disabled]="valoracionForm.invalid"
         class="rounded-md bg-blue-600 px-6 py-2 text-white transition duration-200 hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        Enviar
+        {{ "ENVIAR" | translate }}
       </button>
     </div>
   </form>
