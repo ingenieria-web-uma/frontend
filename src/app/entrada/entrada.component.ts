@@ -13,18 +13,17 @@ import { TranslatePipe } from "@ngx-translate/core";
 import { TraduccionesService } from "../traducciones/traducciones.service";
 
 @Component({
-  selector: "app-entrada",
-  standalone: true,
-  imports: [
-    CommonModule,
-    VersionComponent,
-    BotonEditarComponent,
-    ComentariosComponent,
-    MapasComponent,
-    RouterModule,
-    TranslatePipe
-],
-  templateUrl: "./entrada.component.html",
+    selector: "app-entrada",
+    imports: [
+        CommonModule,
+        VersionComponent,
+        BotonEditarComponent,
+        ComentariosComponent,
+        MapasComponent,
+        RouterModule,
+        TranslatePipe
+    ],
+    templateUrl: "./entrada.component.html"
 })
 export class EntradaComponent implements OnInit {
   entradaForm: FormGroup;

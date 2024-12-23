@@ -6,10 +6,9 @@ import { CommonModule } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-valoraciones',
-  standalone: true,
-  imports: [CommonModule, TranslatePipe],
-  templateUrl: './valoraciones.component.html'
+    selector: 'app-valoraciones',
+    imports: [CommonModule, TranslatePipe],
+    templateUrl: './valoraciones.component.html'
 })
 export class ValoracionesComponent implements OnInit {
   @Input() idUsuario: string | null = null;

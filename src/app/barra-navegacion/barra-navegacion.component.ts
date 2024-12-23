@@ -5,10 +5,9 @@ import { TraduccionesComponent } from '../traducciones/traducciones.component.js
 import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-barra-navegacion',
-  standalone: true,
-  imports: [NotificacionesComponent, TranslatePipe, TraduccionesComponent, RouterModule],
-  templateUrl: './barra-navegacion.component.html'
+    selector: 'app-barra-navegacion',
+    imports: [NotificacionesComponent, TranslatePipe, TraduccionesComponent, RouterModule],
+    templateUrl: './barra-navegacion.component.html'
 })
 export class BarraNavegacionComponent {
   usuarioEnSesion() {

@@ -3,10 +3,9 @@ import { TraduccionesService } from './traducciones.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-traducciones',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './traducciones.component.html',
+    selector: 'app-traducciones',
+    imports: [FormsModule],
+    templateUrl: './traducciones.component.html'
 })
 export class TraduccionesComponent implements OnInit {
   idiomasDisponibles: { code: string; name: string }[] = [];

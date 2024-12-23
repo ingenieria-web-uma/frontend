@@ -4,10 +4,9 @@ import { NewVersionService } from './new-version.service';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-new-version',
-  standalone: true,
-  imports: [ReactiveFormsModule, TranslatePipe],
-  templateUrl: './new-version.component.html',
+    selector: 'app-new-version',
+    imports: [ReactiveFormsModule, TranslatePipe],
+    templateUrl: './new-version.component.html'
 })
 export class NewVersionComponent implements OnInit {
   @Input() version!: FormGroup;

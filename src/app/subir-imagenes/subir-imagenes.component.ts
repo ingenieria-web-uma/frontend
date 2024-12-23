@@ -6,11 +6,10 @@ import { SubirImagenesService } from "./subir-imagenes.service";
 import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-subir-imagenes",
-  standalone: true,
-  imports: [HttpClientModule, CommonModule, FormsModule, TranslatePipe],
-  templateUrl: "./subir-imagenes.component.html",
-  styleUrls: ["./subir-imagenes.component.scss"],
+    selector: "app-subir-imagenes",
+    imports: [HttpClientModule, CommonModule, FormsModule, TranslatePipe],
+    templateUrl: "./subir-imagenes.component.html",
+    styleUrls: ["./subir-imagenes.component.scss"]
 })
 export class SubirImagenesComponent {
   public url : string = "";

@@ -3,10 +3,9 @@ import { FormsModule } from "@angular/forms";
 import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-filter-entradas",
-  standalone: true,
-  imports: [FormsModule, TranslatePipe],
-  templateUrl: "./filter-entradas.component.html"
+    selector: "app-filter-entradas",
+    imports: [FormsModule, TranslatePipe],
+    templateUrl: "./filter-entradas.component.html"
 })
 export class FilterEntradasComponent {
   filtro = {

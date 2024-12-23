@@ -3,10 +3,9 @@ import { Router } from "@angular/router";
 import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-boton-atras",
-  standalone: true,
-  imports: [TranslatePipe],
-  templateUrl: "./boton-atras.component.html"
+    selector: "app-boton-atras",
+    imports: [TranslatePipe],
+    templateUrl: "./boton-atras.component.html"
 })
 export class BotonAtrasComponent {
   @Input()

@@ -4,10 +4,9 @@ import { PerfilService } from './perfil.service';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-perfil',
-  standalone: true,
-  imports: [RouterModule, TranslatePipe],
-  templateUrl: './perfil.component.html',
+    selector: 'app-perfil',
+    imports: [RouterModule, TranslatePipe],
+    templateUrl: './perfil.component.html'
 })
 export class PerfilComponent implements OnInit {
   idUsuario: string | null = null;

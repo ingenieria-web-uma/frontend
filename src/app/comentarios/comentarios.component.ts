@@ -12,11 +12,10 @@ import {
 import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-comentarios",
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
-  templateUrl: "./comentarios.component.html",
-  providers: [DatePipe],
+    selector: "app-comentarios",
+    imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
+    templateUrl: "./comentarios.component.html",
+    providers: [DatePipe]
 })
 export class ComentariosComponent {
   comentarioForm: FormGroup;

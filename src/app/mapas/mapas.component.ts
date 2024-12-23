@@ -5,10 +5,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
 import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-mapas",
-  standalone: true,
-  imports: [ReactiveFormsModule, TranslatePipe],
-  templateUrl: "./mapas.component.html",
+    selector: "app-mapas",
+    imports: [ReactiveFormsModule, TranslatePipe],
+    templateUrl: "./mapas.component.html"
 })
 export class MapasComponent implements OnInit {
   @Input()

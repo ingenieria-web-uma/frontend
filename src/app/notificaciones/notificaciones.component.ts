@@ -7,11 +7,10 @@ import { HttpClient } from '@angular/common/http';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-notificaciones',
-  standalone: true,
-  imports: [CommonModule, TranslatePipe],
-  templateUrl: './notificaciones.component.html',
-  styleUrls: ['./notificaciones.component.scss'],
+    selector: 'app-notificaciones',
+    imports: [CommonModule, TranslatePipe],
+    templateUrl: './notificaciones.component.html',
+    styleUrls: ['./notificaciones.component.scss']
 })
 export class NotificacionesComponent implements OnInit {
   notificaciones: any[] = [];

@@ -8,13 +8,12 @@ import { HttpClient } from "@angular/common/http";
 import { TraduccionesService } from "../traducciones/traducciones.service";
 
 @Component({
-  selector: "app-editor-entradas",
-  standalone: true,
-  imports: [EditorComponent, NgIf],
-  providers: [
-    { provide: TINYMCE_SCRIPT_SRC, useValue: "tinymce/tinymce.min.js" },
-  ],
-  templateUrl: "./editor-entradas.component.html"
+    selector: "app-editor-entradas",
+    imports: [EditorComponent, NgIf],
+    providers: [
+        { provide: TINYMCE_SCRIPT_SRC, useValue: "tinymce/tinymce.min.js" },
+    ],
+    templateUrl: "./editor-entradas.component.html"
 })
 export class EditorEntradasComponent implements OnInit {
   loading = true;

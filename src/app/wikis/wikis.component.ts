@@ -8,10 +8,9 @@ import { TranslatePipe } from "@ngx-translate/core";
 import { TraduccionesService } from "../traducciones/traducciones.service";
 
 @Component({
-  selector: "app-wikis",
-  standalone: true,
-  imports: [CommonModule, BarraBusquedaComponent, BotonEditarComponent, TranslatePipe],
-  templateUrl: "./wikis.component.html",
+    selector: "app-wikis",
+    imports: [CommonModule, BarraBusquedaComponent, BotonEditarComponent, TranslatePipe],
+    templateUrl: "./wikis.component.html"
 })
 export class WikisComponent implements OnInit {
   wikis: any[] = [];

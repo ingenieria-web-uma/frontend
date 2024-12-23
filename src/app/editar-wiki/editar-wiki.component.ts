@@ -10,10 +10,9 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { TraduccionesService } from '../traducciones/traducciones.service';
 
 @Component({
-  selector: 'app-editar-wiki',
-  standalone: true,
-  imports: [CommonModule, FormsModule, BotonAtrasComponent, SubirImagenesComponent,ReactiveFormsModule, TranslatePipe], // Asegúrate de incluir FormsModule aquí
-  templateUrl: './editar-wiki.component.html',
+    selector: 'app-editar-wiki',
+    imports: [CommonModule, FormsModule, BotonAtrasComponent, SubirImagenesComponent, ReactiveFormsModule, TranslatePipe], // Asegúrate de incluir FormsModule aquí
+    templateUrl: './editar-wiki.component.html'
 })
 export class EditorWikiComponent implements OnInit {
   wikiId!: string;

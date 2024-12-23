@@ -10,11 +10,10 @@ import { TranslatePipe } from '@ngx-translate/core'
 import { TraduccionesService } from '../traducciones/traducciones.service'
 
 @Component({
-  selector: 'app-entradas',
-  standalone: true,
-  imports: [CommonModule, FilterEntradasComponent, BotonAtrasComponent, TranslatePipe],
-  templateUrl: './entradas.component.html',
-  providers: [DatePipe],
+    selector: 'app-entradas',
+    imports: [CommonModule, FilterEntradasComponent, BotonAtrasComponent, TranslatePipe],
+    templateUrl: './entradas.component.html',
+    providers: [DatePipe]
 })
 export class EntradasComponent implements OnInit {
   wikiId!: string

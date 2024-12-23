@@ -8,10 +8,9 @@ import { SubirImagenesComponent } from "../subir-imagenes/subir-imagenes.compone
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-new-wiki',
-  standalone: true,
-  imports: [ReactiveFormsModule, BotonAtrasComponent, SubirImagenesComponent, TranslatePipe],
-  templateUrl: './new-wiki.component.html',
+    selector: 'app-new-wiki',
+    imports: [ReactiveFormsModule, BotonAtrasComponent, SubirImagenesComponent, TranslatePipe],
+    templateUrl: './new-wiki.component.html'
 })
 export class NewWikiComponent {
   wikiForm: FormGroup;

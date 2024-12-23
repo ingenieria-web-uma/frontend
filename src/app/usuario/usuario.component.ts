@@ -7,10 +7,9 @@ import { NewValoracionComponent } from "../new-valoracion/new-valoracion.compone
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-usuario',
-  standalone: true,
-  imports: [CommonModule, ValoracionesComponent, NewValoracionComponent, TranslatePipe],
-  templateUrl: './usuario.component.html'
+    selector: 'app-usuario',
+    imports: [CommonModule, ValoracionesComponent, NewValoracionComponent, TranslatePipe],
+    templateUrl: './usuario.component.html'
 })
 export class UsuarioComponent implements OnInit {
   idUsuario: string | null = null;

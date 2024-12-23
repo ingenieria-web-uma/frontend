@@ -2,11 +2,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-boton-editar',
-  standalone: true,
-  imports: [TranslatePipe],
-  templateUrl: './boton-editar.component.html',
-  styleUrls: ['./boton-editar.component.scss']
+    selector: 'app-boton-editar',
+    imports: [TranslatePipe],
+    templateUrl: './boton-editar.component.html',
+    styleUrls: ['./boton-editar.component.scss']
 })
 export class BotonEditarComponent {
   // Evento que se emite cuando el botón es clicado

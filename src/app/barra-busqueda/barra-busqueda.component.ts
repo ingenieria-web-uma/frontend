@@ -3,10 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-barra-busqueda',
-  standalone: true,
-  imports: [FormsModule, TranslatePipe],
-  templateUrl: './barra-busqueda.component.html'
+    selector: 'app-barra-busqueda',
+    imports: [FormsModule, TranslatePipe],
+    templateUrl: './barra-busqueda.component.html'
 })
 export class BarraBusquedaComponent {
   textoBusqueda: string = '';

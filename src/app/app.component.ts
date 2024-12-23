@@ -8,10 +8,9 @@ import {
 } from "@ngx-translate/core";
 
 @Component({
-  selector: "app-root",
-  standalone: true,
-  imports: [RouterOutlet, BarraNavegacionComponent, TranslatePipe, TranslateDirective],
-  templateUrl: './app.component.html'
+    selector: "app-root",
+    imports: [RouterOutlet, BarraNavegacionComponent, TranslatePipe, TranslateDirective],
+    templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
   title = "laWiki";

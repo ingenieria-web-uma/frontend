@@ -4,10 +4,9 @@ import { HistorialVersionesService } from './historial-versiones.service';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-historial-versiones',
-  standalone: true,
-  imports: [TranslatePipe, RouterModule],
-  templateUrl: './historial-versiones.component.html'
+    selector: 'app-historial-versiones',
+    imports: [TranslatePipe, RouterModule],
+    templateUrl: './historial-versiones.component.html'
 })
 export class HistorialVersionesComponent implements OnInit {
 

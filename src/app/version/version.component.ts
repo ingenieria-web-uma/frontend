@@ -7,10 +7,9 @@ import { TranslateDirective } from "@ngx-translate/core";
 import { TraduccionesService } from "../traducciones/traducciones.service";
 
 @Component({
-  selector: "app-version",
-  standalone: true,
-  imports: [CommonModule, TranslateDirective],
-  templateUrl: "./version.component.html",
+    selector: "app-version",
+    imports: [CommonModule, TranslateDirective],
+    templateUrl: "./version.component.html"
 })
 export class VersionComponent implements OnInit {
   @Input()

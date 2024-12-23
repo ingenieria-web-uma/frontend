@@ -14,10 +14,9 @@ import { BotonAtrasComponent } from "../boton-atras/boton-atras.component";
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-new-entrada',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NewVersionComponent, MapasComponent, BotonAtrasComponent, TranslatePipe],
-  templateUrl: './new-entrada.component.html',
+    selector: 'app-new-entrada',
+    imports: [CommonModule, ReactiveFormsModule, NewVersionComponent, MapasComponent, BotonAtrasComponent, TranslatePipe],
+    templateUrl: './new-entrada.component.html'
 })
 export class NewEntradaComponent {
   entradaForm: FormGroup;
