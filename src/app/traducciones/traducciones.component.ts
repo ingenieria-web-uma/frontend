@@ -1,32 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 import { TraduccionesService } from './traducciones.service';
-import { NgFor } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-traducciones',
   standalone: true,
-  imports: [NgFor],
+  imports: [FormsModule],
   templateUrl: './traducciones.component.html',
 })
 export class TraduccionesComponent implements OnInit {
   idiomasDisponibles: { code: string; name: string }[] = [];
+  idiomaActual = 'es';
 
   constructor(private traduccionesService: TraduccionesService) {}
 
   ngOnInit(): void {
     this.traduccionesService.obtenerIdiomasDisponibles().then((idiomas) => {
       this.idiomasDisponibles = idiomas;
-    });
 
-    const idiomaPredeterminado = 'es';
-    this.traduccionesService.cargarDesdeCache(idiomaPredeterminado);
+      this.traduccionesService.cargarDesdeCache(this.idiomaActual);
+    });
   }
 
   cambiarIdioma(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    const selectedLanguage = selectElement?.value;
-    if (selectedLanguage) {
-      this.traduccionesService.traducirYActualizar(selectedLanguage);
-    }
+    this.traduccionesService.traducirYActualizar(this.idiomaActual);
   }
 }

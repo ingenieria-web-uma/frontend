@@ -1,6 +1,6 @@
 <nav class="mb-4 bg-white shadow-md">
   <div class="mx-auto flex max-w-screen-xl items-center justify-between p-4">
-    <a class="flex items-center" href="/">
+    <a routerLink="" class="flex items-center">
       <img src="/faviconCircular.ico" alt="Logo" class="mr-2 w-12" />
       <span class="text-xl font-semibold">laWiki</span>
     </a>
@@ -32,7 +32,7 @@
         @if (usuarioEnSesion()) {
           @if (usuarioEsAdmin()) {
             <li class="flex items-center">
-              <a class="cursor-not-allowed text-gray-400" href="#">{{
+              <a routerLink="#" class="cursor-not-allowed text-gray-400">{{
                 "ADMINISTRAR_USUARIOS" | translate
               }}</a>
             </li>
@@ -40,23 +40,23 @@
           <li class="flex items-center">
             <a
               class="text-gray-800 hover:text-blue-600"
-              href="/perfil/673d2a12ada998325690b320"
+              routerLink="/perfil/673d2a12ada998325690b320"
               >{{ "PERFIL" | translate }}</a
             >
           </li>
           <li class="flex items-center">
-            <a class="cursor-not-allowed text-gray-400" href="#">{{
+            <a routerLink="#" class="cursor-not-allowed text-gray-400">{{
               "CERRAR_SESION" | translate
             }}</a>
           </li>
         } @else {
           <li class="flex items-center">
-            <a class="cursor-not-allowed text-gray-400" href="#">{{
+            <a routerLink="#" class="cursor-not-allowed text-gray-400">{{
               "REGISTRARSE" | translate
             }}</a>
           </li>
           <li class="flex items-center">
-            <a class="cursor-not-allowed text-gray-400" href="#">{{
+            <a routerLink="#" class="cursor-not-allowed text-gray-400">{{
               "INICIAR_SESION" | translate
             }}</a>
           </li>

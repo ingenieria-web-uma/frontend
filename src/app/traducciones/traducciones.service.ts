@@ -13,13 +13,13 @@ export class TraduccionesService {
   constructor(private http: HttpClient, private translate: TranslateService) {}
 
   async traducirYActualizar(lang: string): Promise<void> {
-    if (this.cache[lang]) {
-      this.translate.setTranslation(lang, this.cache[lang], true);
+    const defaultTexts = await firstValueFrom(this.http.get('/i18n/es.json'));
+
+    if (this.cache[lang] || lang === 'es') {
+      this.translate.setTranslation(lang, lang === 'es' ? defaultTexts : this.cache[lang], true);
       this.translate.use(lang);
       return;
     }
-
-    const defaultTexts = await firstValueFrom(this.http.get('/i18n/es.json'));
 
     const traducciones = await this.traducirTexto(defaultTexts, lang);
 

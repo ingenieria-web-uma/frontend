@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { HistorialVersionesService } from './historial-versiones.service';
 import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-historial-versiones',
   standalone: true,
-  imports: [TranslatePipe],
+  imports: [TranslatePipe, RouterModule],
   templateUrl: './historial-versiones.component.html'
 })
 export class HistorialVersionesComponent implements OnInit {
