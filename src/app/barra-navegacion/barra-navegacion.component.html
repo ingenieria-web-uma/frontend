@@ -44,10 +44,10 @@
               >{{ "PERFIL" | translate }}</a
             >
           </li>
-          <li class="flex items-center">
-            <a routerLink="#" class="cursor-not-allowed text-gray-400">{{
+          <li class="flex items-center" >
+            <button (click)="logOut()" class="text-gray-800 hover:text-blue-600">{{
               "CERRAR_SESION" | translate
-            }}</a>
+            }}</button>
           </li>
         } @else {
           <li class="flex items-center">

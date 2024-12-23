@@ -48,6 +48,18 @@ export class AuthGoogleService {
     return this.oAuthService.getIdToken();
   }
 
+  getExpiresIn() { 
+    return this.oAuthService.getAccessTokenExpiration();
+  }
+
+  getRefreshToken() {
+    return this.oAuthService.getRefreshToken();
+  }
+
+  getExpiresInRefresh() { 
+    return 0;
+  }
+
   getProfile() {
     return this.oAuthService.getIdentityClaims();
   }

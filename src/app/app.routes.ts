@@ -10,9 +10,13 @@ import { EditorEntradasComponent } from "./editor-entradas/editor-entradas.compo
 import { HistorialVersionesComponent } from "./historial-versiones/historial-versiones.component";
 import { PerfilComponent } from "./perfil/perfil.component";
 import { UsuarioComponent } from "./usuario/usuario.component";
+import { LoginComponent } from "./login/login.component";
+import { BridgeComponent } from "./bridge/bridge.component";
 
 export const routes: Routes = [
   { path: "", component: WikisComponent },
+  { path: "login", component: LoginComponent },
+  { path: "bridge", component: BridgeComponent },
   { path: "new_wiki", component: NewWikiComponent },
   { path: "wiki/:id", component: EntradasComponent },
   { path: "wiki/:idWiki/new_entrada", component: NewEntradaComponent },
