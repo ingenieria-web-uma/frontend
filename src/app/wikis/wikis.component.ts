@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { BarraBusquedaComponent } from "../barra-busqueda/barra-busqueda.component";
 import { BotonEditarComponent } from "../boton-editar/boton-editar.component";
 import { TranslatePipe } from "@ngx-translate/core";
+import { TraduccionesService } from "../traducciones/traducciones.service";
 
 @Component({
   selector: "app-wikis",
@@ -20,6 +21,7 @@ export class WikisComponent implements OnInit {
   constructor(
     private wikisService: WikisService,
     private router: Router,
+    private traduccionesService: TraduccionesService
   ) {}
 
   ngOnInit(): void {
@@ -28,8 +30,11 @@ export class WikisComponent implements OnInit {
 
   obtenerWikis(nombre: string = ''): void {
     this.wikisService.getWikis(nombre).subscribe({
-      next: (data) => {
+      next: async (data) => {
         this.wikis = data;
+        for (const wiki of data) {
+          wiki.nombre = await this.traduccionesService.traducirTextoDirecto(wiki.nombre);
+        }
         this.wikisFiltradas = this.wikis;
       },
       error: (err) => {

@@ -19,7 +19,7 @@
       formControlName="nombre"
       name="nombre"
       class="mt-1 block w-full rounded-md border-gray-300 p-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-      placeholder="Escribe el nuevo nombre aquí"
+      [placeholder]="'ESCRIBE_NUEVO_NOMBRE' | translate"
     />
   </div>
 
@@ -27,7 +27,7 @@
     <img
       *ngIf="imageUrl"
       [src]="imageUrl"
-      alt="Imagen de la Wiki"
+      [alt]="'IMAGEN_WIKI' | translate"
       class="mb-4 max-h-52 max-w-xs"
     />
 

@@ -7,6 +7,7 @@ import { BotonAtrasComponent } from "../boton-atras/boton-atras.component";
 import { SubirImagenesComponent } from "../subir-imagenes/subir-imagenes.component";  // Importa FormsModule
 import { SubirImagenesService } from '../subir-imagenes/subir-imagenes.service';
 import { TranslatePipe } from '@ngx-translate/core';
+import { TraduccionesService } from '../traducciones/traducciones.service';
 
 @Component({
   selector: 'app-editar-wiki',
@@ -28,6 +29,7 @@ export class EditorWikiComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private imagenUrl: SubirImagenesService,
+    private traduccionesService: TraduccionesService
   ) {
     this.wikiForm = this.fb.group({
       nombre: ['', Validators.required]
@@ -37,12 +39,12 @@ export class EditorWikiComponent implements OnInit {
   ngOnInit(): void {
     this.wikiId = this.route.snapshot.paramMap.get('idWiki')!;
     this.WikisService.getWiki(this.wikiId).subscribe({
-      next: (data) => {
+      next: async (data) => {
         this.wikiForm.patchValue({
-          nombre: data.nombre,
+          nombre: await this.traduccionesService.traducirTextoDirecto(data.nombre)
         });
-        this.antiguoNombreWiki = data.nombre;
-        this.nombreWiki = data.nombre;
+        this.antiguoNombreWiki = await this.traduccionesService.traducirTextoDirecto(data.nombre);
+        this.nombreWiki = await this.traduccionesService.traducirTextoDirecto(data.nombre);
         this.imageUrl = data.imagenUrl;
         console.log('Wiki:', data);
       },

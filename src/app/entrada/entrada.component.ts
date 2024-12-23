@@ -10,6 +10,7 @@ import { MapasComponent } from "../mapas/mapas.component";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { UsuarioService } from "../usuario/usuario.service";
 import { TranslatePipe } from "@ngx-translate/core";
+import { TraduccionesService } from "../traducciones/traducciones.service";
 
 @Component({
   selector: "app-entrada",
@@ -44,6 +45,7 @@ export class EntradaComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder,
+    private traduccionesService: TraduccionesService
   ) {
     this.entradaForm = this.fb.group({
       ubicacion: this.fb.group({
@@ -69,9 +71,9 @@ export class EntradaComponent implements OnInit {
 
   private cargarEntrada() {
     this.entradaService.getEntradaById(this.entradaId).subscribe({
-      next: (data) => {
+      next: async (data) => {
         this.versionActualId = data["idVersionActual"];
-        this.nombreEntrada = data["nombre"];
+        this.nombreEntrada = await this.traduccionesService.traducirTextoDirecto(data["nombre"]);
         this.idUsuario = data["idUsuario"];
         this.fechaCreacion = new Date(data["fechaCreacion"]);
         this.obtenerNombreUsuario(this.idUsuario);

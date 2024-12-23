@@ -43,6 +43,55 @@ export class TraduccionesService {
     return response.translations;
   }
 
+  async traducirTextoDirecto(texto: string): Promise<string> {
+    const lang = this.translate.currentLang || 'es';
+
+    if (lang === 'es') {
+      return texto;
+    }
+
+    if (this.cache[lang]?.[texto]) {
+      return this.cache[lang][texto];
+    }
+
+    const localCache = localStorage.getItem(`translations_${lang}`);
+    if (localCache) {
+      const parsedCache = JSON.parse(localCache);
+      if (parsedCache[texto]) {
+        this.cache[lang] = parsedCache;
+        return parsedCache[texto];
+      }
+    }
+
+    const body = {
+      textos: { [texto]: texto },
+      target_lang: lang,
+    };
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post<any>(`${this.apiUrl}/traducir`, body, {
+          headers: { 'Content-Type': 'application/json' },
+        })
+      );
+
+      const traduccion = response.translations[texto];
+
+      if (!this.cache[lang]) {
+        this.cache[lang] = {};
+      }
+      this.cache[lang][texto] = traduccion;
+
+      const updatedCache = { ...this.cache[lang], ...{ [texto]: traduccion } };
+      localStorage.setItem(`translations_${lang}`, JSON.stringify(updatedCache));
+
+      return traduccion;
+    } catch (error) {
+      console.error('Error al traducir el texto:', error);
+      return texto;
+    }
+  }
+
   cargarDesdeCache(lang: string): void {
     const cache = localStorage.getItem(`translations_${lang}`);
     if (cache) {

@@ -5,6 +5,7 @@ import { SubirImagenesService } from "./subirImagen.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
+import { TraduccionesService } from "../traducciones/traducciones.service";
 
 @Component({
   selector: "app-editor-entradas",
@@ -29,6 +30,7 @@ export class EditorEntradasComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
+    private traduccionesService: TraduccionesService
   ) { }
 
   //init
@@ -36,10 +38,10 @@ export class EditorEntradasComponent implements OnInit {
     // url id de la entrada
     this.idEntrada = this.route.snapshot.paramMap.get("id")!;
     this.obtenerUltimaVersion(this.idEntrada).subscribe({
-      next: (version) => {
+      next: async (version) => {
         console.log("Contenido de la entrada:", version);
         this.curretVersion = version;
-        this.defaultContent = version.contenido;
+        this.defaultContent = await this.traduccionesService.traducirTextoDirecto(version.contenido);
         this.loading = false;
       },
       error: (err) => {

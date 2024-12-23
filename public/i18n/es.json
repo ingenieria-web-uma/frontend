@@ -14,7 +14,6 @@
     "USUARIO:": "Usuario:",
     "FECHA_DE_CREACION:": "Fecha de creación:",
     "LISTA_DE_ENTRADAS": "Lista de entradas de la wiki",
-    "IMAGEN_WIKI_FORMAT": "Imagen de la wiki",
     "CREAR_ENTRADA": "Crear entrada",
     "FECHA_DE_CREACION_FORMAT": "Fecha de creación:",
     "BORRAR": "Borrar",
@@ -64,5 +63,6 @@
     "COMENTARIOS": "Comentarios",
     "SUBIR": "Subir",
     "ESCRIBE_COMENTARIO": "Escribe tu comentario...",
-    "MAPA": "Mapa"
+    "MAPA": "Mapa",
+    "ESCRIBE_NUEVO_NOMBRE": "Escribe el nuevo nombre aquí"
 }
