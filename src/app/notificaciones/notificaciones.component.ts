@@ -1,23 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { NotificacionesService } from './notificaciones.service';
-import { NavigationEnd, Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { TranslatePipe } from '@ngx-translate/core';
+import { Component, OnInit } from "@angular/core";
+import { NotificacionesService } from "./notificaciones.service";
+import { NavigationEnd, Router } from "@angular/router";
+import { CommonModule } from "@angular/common";
+import { Subscription } from "rxjs";
+import { HttpClient } from "@angular/common/http";
+import { TranslatePipe } from "@ngx-translate/core";
 
 @Component({
-    selector: 'app-notificaciones',
-    imports: [CommonModule, TranslatePipe],
-    templateUrl: './notificaciones.component.html',
-    styleUrls: ['./notificaciones.component.scss']
+  selector: "app-notificaciones",
+  imports: [CommonModule, TranslatePipe],
+  standalone: true,
+  templateUrl: "./notificaciones.component.html",
+  styleUrls: ["./notificaciones.component.scss"],
 })
 export class NotificacionesComponent implements OnInit {
   notificaciones: any[] = [];
   notificacionesFiltradas: any[] = [];
   notificacionesSinLeer: number = 0;
   mostrarDesplegable: boolean = false;
-  filtroActual: string = 'todas';
+  filtroActual: string = "todas";
   private routerSubscription: Subscription;
 
   constructor(
@@ -61,9 +62,9 @@ export class NotificacionesComponent implements OnInit {
     this.mostrarDesplegable = !this.mostrarDesplegable;
     if (this.mostrarDesplegable) {
       if (this.notificacionesSinLeer > 0) {
-        this.filtroActual = 'pendientes';
+        this.filtroActual = "pendientes";
       } else {
-        this.filtroActual = 'todas';
+        this.filtroActual = "todas";
       }
       this.filtrarNotificaciones(this.filtroActual);
     }
@@ -71,13 +72,13 @@ export class NotificacionesComponent implements OnInit {
 
   filtrarNotificaciones(filtro: string): void {
     this.filtroActual = filtro;
-    if (filtro === 'todas') {
+    if (filtro === "todas") {
       this.notificacionesFiltradas = this.notificaciones;
-    } else if (filtro === 'pendientes') {
+    } else if (filtro === "pendientes") {
       this.notificacionesFiltradas = this.notificaciones.filter(
         (n) => !n.is_read,
       );
-    } else if (filtro === 'leidas') {
+    } else if (filtro === "leidas") {
       this.notificacionesFiltradas = this.notificaciones.filter(
         (n) => n.is_read,
       );

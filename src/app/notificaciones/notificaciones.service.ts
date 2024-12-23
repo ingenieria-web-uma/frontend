@@ -1,21 +1,28 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { UserService } from "../core/services/user.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class NotificacionesService {
-  private apiURL = 'http://localhost:8000/notificaciones';
+  private apiURL = "http://localhost:8000/notificaciones";
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+  ) {}
 
   getNotificaciones(): Observable<any> {
     return this.http.get<any>(`${this.apiURL}`);
   }
 
   deleteNotificacion(id: string): Observable<any> {
-    return this.http.delete(`${this.apiURL}/${id}`);
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    };
+    return this.http.delete(`${this.apiURL}/${id}`, { headers });
   }
 
   deleteAllNotificaciones(): Observable<any> {
