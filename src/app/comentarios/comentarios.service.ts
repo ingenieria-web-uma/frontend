@@ -1,16 +1,20 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
+import { UserService } from "../core/services/user.service";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class ComentariosService {
   private apiUrl = "http://localhost:8000/comentarios/";
   private apiUrlUsuarios = "http://localhost:8000/usuarios/";
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+  ) {}
 
   getComentarios(idEntrada: string): Observable<any[]> {
     return this.http
@@ -23,6 +27,9 @@ export class ComentariosService {
   }
 
   crearComentario(comentarioData: any): Observable<any> {
-    return this.http.post(this.apiUrl, comentarioData);
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    };
+    return this.http.post(this.apiUrl, comentarioData, { headers });
   }
 }

@@ -1,13 +1,13 @@
-import { Component, effect } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthGoogleService } from '../guards/auth-google.service';
-import { User } from '../core/models/user.model';
-import { UserService } from '../core/services/user.service';
+import { Component, effect } from "@angular/core";
+import { Router } from "@angular/router";
+import { AuthGoogleService } from "../guards/auth-google.service";
+import { User } from "../core/models/user.model";
+import { UserService } from "../core/services/user.service";
 
 @Component({
-  selector: 'app-bridge',
+  selector: "app-bridge",
   imports: [],
-  templateUrl: './bridge.component.html',
+  templateUrl: "./bridge.component.html",
 })
 export class BridgeComponent {
   profile: any;
@@ -21,13 +21,14 @@ export class BridgeComponent {
       if (this.profile) {
         console.log("Profile: ", this.profile());
         console.log("auth: ", this.authService.getRawProfile());
-        const {email, sub, jti, exp} = this.profile();
-        let user : User;
+        const { name, email, sub, picture } = this.profile();
+        let user: User;
         user = {
-          name: this.profile().name,
-          email: this.profile().email,
-          role: 'lector',
-          profilePicture: this.profile().picture,
+          id: sub,
+          name: name,
+          email: email,
+          role: "lector",
+          profilePicture: picture,
           wantsEmailNotifications: true,
           oauth: {
             access_token: this.authService.getToken(),
@@ -38,7 +39,7 @@ export class BridgeComponent {
         };
         this.userService.setUser(user);
         console.log("Usuario: ", this.userService.getUser());
-        this.router.navigate(['/']);
+        this.router.navigate(["/"]);
       }
     });
   }

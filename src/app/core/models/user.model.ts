@@ -1,6 +1,7 @@
 type Role = "admin" | "lector" | "redactor" | "editor";
 
 export interface User {
+  id: string;
   name: string;
   email: string;
   role: Role;

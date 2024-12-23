@@ -1,19 +1,26 @@
-import { Component } from '@angular/core';
-import { NotificacionesComponent } from '../notificaciones/notificaciones.component.js';
+import { Component } from "@angular/core";
+import { NotificacionesComponent } from "../notificaciones/notificaciones.component.js";
 import { TranslatePipe } from "@ngx-translate/core";
-import { TraduccionesComponent } from '../traducciones/traducciones.component.js';
-import { Router, RouterModule } from '@angular/router';
-import { AuthGoogleService } from '../guards/auth-google.service.js';
+import { TraduccionesComponent } from "../traducciones/traducciones.component.js";
+import { Router, RouterModule } from "@angular/router";
+import { AuthGoogleService } from "../guards/auth-google.service.js";
+import { UserService } from "../core/services/user.service.js";
 
 @Component({
-    selector: 'app-barra-navegacion',
-    imports: [NotificacionesComponent, TranslatePipe, TraduccionesComponent, RouterModule],
-    templateUrl: './barra-navegacion.component.html'
+  selector: "app-barra-navegacion",
+  standalone: true,
+  imports: [
+    NotificacionesComponent,
+    TranslatePipe,
+    TraduccionesComponent,
+    RouterModule,
+  ],
+  templateUrl: "./barra-navegacion.component.html",
 })
 export class BarraNavegacionComponent {
-
   constructor(
     private authService: AuthGoogleService,
+    private userService: UserService,
     private router: Router,
   ) {}
 
@@ -24,9 +31,10 @@ export class BarraNavegacionComponent {
   usuarioEsAdmin() {
     return true;
   }
-  
+
   logOut() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.userService.clearUser();
+    this.router.navigate(["/login"]);
   }
 }

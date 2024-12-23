@@ -23,6 +23,12 @@ export class UserService {
     localStorage.setItem("user", JSON.stringify(user));
   }
 
+  clearUser(): void {
+    this.user = null;
+    this.user$.next(null);
+    localStorage.removeItem("user");
+  }
+
   getUserObservable(): Observable<User | null> {
     return this.user$.asObservable();
   }

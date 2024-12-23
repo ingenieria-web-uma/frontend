@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { TraduccionesService } from './traducciones.service';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit } from "@angular/core";
+import { TraduccionesService } from "./traducciones.service";
+import { FormsModule } from "@angular/forms";
 
 @Component({
-    selector: 'app-traducciones',
-    imports: [FormsModule],
-    templateUrl: './traducciones.component.html'
+  selector: "app-traducciones",
+  imports: [FormsModule],
+  standalone: true,
+  templateUrl: "./traducciones.component.html",
 })
 export class TraduccionesComponent implements OnInit {
   idiomasDisponibles: { code: string; name: string }[] = [];
-  idiomaActual = 'es';
+  idiomaActual = "es";
 
   constructor(private traduccionesService: TraduccionesService) {}
 
   ngOnInit(): void {
-    const idiomaGuardado = localStorage.getItem('idiomaSeleccionado');
+    const idiomaGuardado = localStorage.getItem("idiomaSeleccionado");
     if (idiomaGuardado) {
       this.idiomaActual = idiomaGuardado;
     }
@@ -29,7 +30,7 @@ export class TraduccionesComponent implements OnInit {
   }
 
   cambiarIdioma(event: Event): void {
-    localStorage.setItem('idiomaSeleccionado', this.idiomaActual);
+    localStorage.setItem("idiomaSeleccionado", this.idiomaActual);
 
     this.traduccionesService.traducirYActualizar(this.idiomaActual);
   }
