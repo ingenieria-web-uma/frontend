@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { User } from "../models/user.model";
+import { Router } from "@angular/router";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
   providedIn: "root",
@@ -10,8 +12,12 @@ export class UserService {
   private user$: BehaviorSubject<User | null>;
   private user: User | null = null;
 
-  constructor() {
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+  ) {
     this.user$ = new BehaviorSubject<User | null>(this.loadUserFromStorage());
+    this.user = this.loadUserFromStorage();
   }
 
   private loadUserFromStorage(): User | null {
@@ -34,7 +40,7 @@ export class UserService {
   }
 
   getUser(): User | null {
-    return this.user;
+    return this.user ?? this.loadUserFromStorage();
   }
 
   setUser(user: User): void {
@@ -43,5 +49,21 @@ export class UserService {
       this.saveUserToStorage(user);
       this.user$.next(user);
     }
+  }
+
+  saveUserToDb(user: User): Observable<any> {
+    const userData = {
+      googleId: user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      access_token: user.oauth.access_token,
+      expires_in: user.oauth.expires_in,
+      wants_emails: user.wantsEmailNotifications,
+    };
+    const headers = {
+      Authorization: `Bearer ${this.getUser()?.oauth.access_token}`,
+    };
+    return this.http.post(this.apiUrl + "login", userData, { headers });
   }
 }

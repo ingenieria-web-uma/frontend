@@ -10,12 +10,13 @@ import {
   Validators,
 } from "@angular/forms";
 import { TranslatePipe } from "@ngx-translate/core";
+import { UserService } from "../core/services/user.service";
 
 @Component({
-    selector: "app-comentarios",
-    imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
-    templateUrl: "./comentarios.component.html",
-    providers: [DatePipe]
+  selector: "app-comentarios",
+  imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
+  templateUrl: "./comentarios.component.html",
+  providers: [DatePipe],
 })
 export class ComentariosComponent {
   comentarioForm: FormGroup;
@@ -25,6 +26,7 @@ export class ComentariosComponent {
   constructor(
     private route: ActivatedRoute,
     private comentariosService: ComentariosService,
+    private userService: UserService,
     private fb: FormBuilder,
     private datePipe: DatePipe,
   ) {
@@ -60,6 +62,7 @@ export class ComentariosComponent {
           },
           error: (err: any) => {
             console.error("Error al obtener el usuario:", err);
+            comentario["nombreUsuario"] = "Cuenta eliminada";
           },
         });
     }
@@ -78,7 +81,7 @@ export class ComentariosComponent {
     if (this.comentarioForm.valid) {
       const comentarioData = this.comentarioForm.value;
       comentarioData.idEntrada = this.entradaId;
-      comentarioData.idUsuario = "673d2a12ada998325690b320"; // ID de usuario fijo
+      comentarioData.idUsuario = this.userService.getUser()?.id;
 
       this.comentariosService.crearComentario(comentarioData).subscribe({
         next: (response) => {

@@ -19,10 +19,7 @@ export class NotificacionesService {
   }
 
   deleteNotificacion(id: string): Observable<any> {
-    const headers = {
-      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
-    };
-    return this.http.delete(`${this.apiURL}/${id}`, { headers });
+    return this.http.delete(`${this.apiURL}/${id}`);
   }
 
   deleteAllNotificaciones(): Observable<any> {

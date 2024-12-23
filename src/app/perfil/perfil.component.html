@@ -4,10 +4,10 @@
   </h1>
 
   <div class="mb-6 flex items-center justify-center">
-    <div
-      class="flex h-24 w-24 items-center justify-center rounded-full bg-blue-500 text-3xl font-bold text-white"
-    >
-      {{ usuarioData?.name?.charAt(0).toUpperCase() }}
+    <img *ngIf="user?.profilePicture" [src]="user?.profilePicture" class="rounded-full" />
+    <div *ngIf="!user?.profilePicture"
+      class="flex h-24 w-24 items-center justify-center rounded-full bg-blue-500 text-3xl font-bold text-white">
+      {{ user?.name?.charAt(0)?.toUpperCase() }}
     </div>
   </div>
 
@@ -15,47 +15,43 @@
     <div class="flex items-center justify-between">
       <span class="text-lg font-medium text-gray-600">{{
         "NOMBRE" | translate
-      }}</span>
-      <span class="text-lg text-gray-800">{{ usuarioData?.name }}</span>
+        }}</span>
+      <span class="text-lg text-gray-800">{{ user?.name }}</span>
     </div>
 
     <div class="flex items-center justify-between">
       <span class="text-lg font-medium text-gray-600">{{
         "EMAIL" | translate
-      }}</span>
-      <span class="text-lg text-gray-800">{{ usuarioData?.email }}</span>
+        }}</span>
+      <span class="text-lg text-gray-800">{{ user?.email }}</span>
     </div>
 
     <div class="flex items-center justify-between">
       <span class="text-lg font-medium text-gray-600">{{
         "ROL" | translate
-      }}</span>
-      <span class="text-lg text-gray-800">{{ usuarioData?.role }}</span>
+        }}</span>
+      <span class="text-lg text-gray-800">{{ user?.role }}</span>
     </div>
 
     <div class="flex items-center justify-between">
       <span class="text-lg font-medium text-gray-600">{{
         "NOTIFICACIONES_EMAIL" | translate
-      }}</span>
+        }}</span>
       <span class="text-lg text-gray-800">{{
-        usuarioData?.wants_emails === "true"
-          ? ("SI" | translate)
-          : ("NO" | translate)
-      }}</span>
+        user?.wantsEmailNotifications === true
+        ? ("SI" | translate)
+        : ("NO" | translate)
+        }}</span>
     </div>
   </div>
 
   <div class="mt-8 flex justify-center space-x-4">
-    <button
-      class="rounded-md bg-green-600 px-6 py-2 text-white transition duration-200 hover:bg-green-700"
-      [routerLink]="['/usuario', idUsuario]"
-    >
+    <button class="rounded-md bg-green-600 px-6 py-2 text-white transition duration-200 hover:bg-green-700"
+      [routerLink]="['/usuario', idUsuario]">
       {{ "MIS_VALORACIONES" | translate }}
     </button>
 
-    <button
-      class="rounded-md bg-blue-600 px-6 py-2 text-white transition duration-200 hover:bg-blue-700"
-    >
+    <button class="rounded-md bg-blue-600 px-6 py-2 text-white transition duration-200 hover:bg-blue-700">
       {{ "EDITAR_PERFIL" | translate }}
     </button>
   </div>
