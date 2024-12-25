@@ -7,6 +7,7 @@ import { MatIconModule } from "@angular/material/icon"
 import { AuthGoogleService } from "@core/services/auth-google.service"
 import { Router } from "@angular/router"
 import { LoginService } from "@core/services/login.service"
+import { UserService } from "@app/core/services/user.service"
 
 const MODULES: any[] = [
   MatButtonModule,
@@ -26,6 +27,7 @@ const MODULES: any[] = [
 export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthGoogleService,
+    private userService: UserService,
     private router: Router,
   ) { }
 
@@ -37,5 +39,10 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.authService.login() // Inicia el flujo de autenticación
+  }
+
+  loginInvitado(): void {
+    this.userService.createInvitado()
+    this.router.navigate(["/"])
   }
 }

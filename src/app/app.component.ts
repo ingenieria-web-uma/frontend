@@ -6,6 +6,7 @@ import {
   TranslatePipe,
   TranslateDirective,
 } from "@ngx-translate/core"
+import { NgIf } from "@angular/common"
 
 @Component({
   selector: "app-root",
@@ -14,11 +15,13 @@ import {
     BarraNavegacionComponent,
     TranslatePipe,
     TranslateDirective,
+    NgIf,
   ],
   templateUrl: "./app.component.html",
 })
 export class AppComponent implements OnInit {
   title = "laWiki"
+  showNavbar = true
 
   constructor(
     private router: Router,
@@ -31,8 +34,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.router.events.subscribe((event) => {
-      if (!(event instanceof NavigationEnd)) {
-        return
+      if (event instanceof NavigationEnd) {
+        this.showNavbar = event.url !== "/login"
       }
       window.scrollTo(0, 0)
     })

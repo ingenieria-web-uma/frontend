@@ -62,4 +62,20 @@ export class UserService {
     }
     return this.http.post(this.apiUrl + "login", userData, { headers })
   }
+
+  createInvitado(): void {
+    this.clearUser()
+    this.setUser({
+      id: "",
+      name: "Invitado",
+      email: "",
+      role: "lector",
+      profilePicture: "",
+      oauth: {
+        access_token: "",
+        expires_in: 0,
+      },
+      wantsEmailNotifications: false,
+    })
+  }
 }
