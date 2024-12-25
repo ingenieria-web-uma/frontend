@@ -36,7 +36,7 @@ export class UserService {
   }
 
   getUser(): User | null {
-    return this.user ?? this.loadUserFromStorage()
+    return this.loadUserFromStorage() ?? this.user
   }
 
   setUser(user: User): void {
@@ -52,13 +52,14 @@ export class UserService {
       googleId: user.id,
       name: user.name,
       email: user.email,
+      profile_picture: user.profilePicture,
       role: user.role,
       access_token: user.oauth.access_token,
       expires_in: user.oauth.expires_in,
       wants_emails: user.wantsEmailNotifications,
     }
     const headers = {
-      Authorization: `Bearer ${this.getUser()?.oauth.access_token}`,
+      Authorization: `Bearer ${user.oauth.access_token}`,
     }
     return this.http.post(this.apiUrl + "login", userData, { headers })
   }

@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.showNavbar = event.url !== "/login"
+        this.showNavbar = event.url !== "/login" && event.url !== "/bridge"
       }
       window.scrollTo(0, 0)
     })

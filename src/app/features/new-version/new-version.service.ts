@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Injectable } from "@angular/core"
+import { UserService } from "@app/core/services/user.service"
 import { catchError, Observable, throwError } from "rxjs"
 
 @Injectable({
@@ -8,11 +9,17 @@ import { catchError, Observable, throwError } from "rxjs"
 export class NewVersionService {
   private apiUrl = "http://localhost:8000/versiones/"
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+  ) {}
 
   // Método para crear una versión
   createVersion(versionData: any): Observable<any> {
-    const headers = new HttpHeaders({ "Content-Type": "application/json" })
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
     return this.http.post(this.apiUrl, versionData, { headers }).pipe(
       catchError((error) => {
         console.error("Error al crear la versión", error)
@@ -23,7 +30,10 @@ export class NewVersionService {
 
   // Método para actualizar una versión
   updateVersion(id: string, versionData: any): Observable<any> {
-    const headers = new HttpHeaders({ "Content-Type": "application/json" })
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
     return this.http.put(`${this.apiUrl}${id}`, versionData, { headers }).pipe(
       catchError((error) => {
         console.error("Error al actualizar la versión", error)

@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from "@angular/router"
 import { Observable } from "rxjs"
 import { HttpClient } from "@angular/common/http"
 import { TraduccionesService } from "../traducciones/traducciones.service"
+import { UserService } from "@app/core/services/user.service"
 
 @Component({
   selector: "app-editor-entradas",
@@ -30,7 +31,8 @@ export class EditorEntradasComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private traduccionesService: TraduccionesService,
-  ) { }
+    private userService: UserService,
+  ) {}
 
   //init
   ngOnInit(): void {
@@ -59,9 +61,16 @@ export class EditorEntradasComponent implements OnInit {
   }
 
   actualizarVersionDeEntrada(nuevoIdVersion: string) {
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
     const url = "http://localhost:8000/entradas/"
     this.http
-      .put(url + this.idEntrada, { idVersionActual: nuevoIdVersion })
+      .put(
+        url + this.idEntrada,
+        { idVersionActual: nuevoIdVersion },
+        { headers },
+      )
       .subscribe({
         next: (data) => {
           console.log("Entrada actualizada correctamente:", data)
@@ -80,8 +89,11 @@ export class EditorEntradasComponent implements OnInit {
       idEntrada: this.curretVersion.idEntrada,
       contenido: this.newContent,
     }
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
     const url = "http://localhost:8000/versiones/"
-    this.http.post(url, body).subscribe({
+    this.http.post(url, body, { headers }).subscribe({
       next: (data: any) => {
         console.log("Versión guardada correctamente:", data)
         this.actualizarVersionDeEntrada(data["idVersion"])

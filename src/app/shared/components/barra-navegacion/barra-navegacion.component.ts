@@ -22,7 +22,7 @@ export class BarraNavegacionComponent {
     private authService: AuthGoogleService,
     private userService: UserService,
     private router: Router,
-  ) { }
+  ) {}
 
   usuarioEnSesion() {
     return true
@@ -36,5 +36,9 @@ export class BarraNavegacionComponent {
     this.authService.logout()
     this.userService.clearUser()
     this.router.navigate(["/login"])
+  }
+
+  irAPerfil() {
+    this.router.navigate(["/perfil/" + this.userService.getUser()?.id])
   }
 }

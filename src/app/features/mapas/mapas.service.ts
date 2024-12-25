@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core"
 import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { catchError, Observable, throwError } from "rxjs"
+import { UserService } from "@app/core/services/user.service"
 
 @Injectable({
   providedIn: "root",
@@ -8,7 +9,10 @@ import { catchError, Observable, throwError } from "rxjs"
 export class MapasService {
   private apiUrl = "http://localhost:8000/mapas/"
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+  ) {}
 
   searchByQuery(params: {
     query?: string
@@ -34,7 +38,10 @@ export class MapasService {
   }
 
   createMapa(mapaData: any): Observable<any> {
-    const headers = new HttpHeaders({ "Content-Type": "application/json" })
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
     return this.http.post(this.apiUrl, mapaData, { headers }).pipe(
       catchError((error) => {
         console.error("Error al crear el mapa", error)
@@ -44,7 +51,10 @@ export class MapasService {
   }
 
   updateMapa(id: string, mapaData: any): Observable<any> {
-    const headers = new HttpHeaders({ "Content-Type": "application/json" })
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
     return this.http.put(`${this.apiUrl}${id}`, mapaData, { headers }).pipe(
       catchError((error) => {
         console.error("Error al actualizar el mapa", error)
@@ -58,7 +68,10 @@ export class MapasService {
   }
 
   deleteMapa(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}${id}`).pipe(
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
+    return this.http.delete(`${this.apiUrl}${id}`, { headers }).pipe(
       catchError((error) => {
         console.error("Error al eliminar el mapa", error)
         return throwError(() => error)

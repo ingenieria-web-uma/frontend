@@ -12,27 +12,41 @@ export class NotificacionesService {
   constructor(
     private http: HttpClient,
     private userService: UserService,
-  ) { }
+  ) {}
 
   getNotificaciones(): Observable<any> {
     return this.http.get<any>(`${this.apiURL}`)
   }
 
   deleteNotificacion(id: string): Observable<any> {
-    return this.http.delete(`${this.apiURL}/${id}`)
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
+    return this.http.delete(`${this.apiURL}/${id}`, { headers })
   }
 
   deleteAllNotificaciones(): Observable<any> {
-    return this.http.delete(`${this.apiURL}`)
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
+    return this.http.delete(`${this.apiURL}`, { headers })
   }
 
   markAsRead(id: string): Observable<any> {
     const body = { is_read: true }
-    return this.http.put(`${this.apiURL}/${id}`, body)
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
+    return this.http.put(`${this.apiURL}/${id}`, body, { headers })
   }
 
   markAsUnread(id: string): Observable<any> {
     const body = { is_read: false }
-    return this.http.put(`${this.apiURL}/${id}`, body)
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
+    return this.http.put(`${this.apiURL}/${id}`, body, { headers })
   }
 }

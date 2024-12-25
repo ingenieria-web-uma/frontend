@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core"
 import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { catchError, Observable, throwError } from "rxjs"
+import { UserService } from "@app/core/services/user.service"
 
 @Injectable({
   providedIn: "root",
@@ -8,14 +9,20 @@ import { catchError, Observable, throwError } from "rxjs"
 export class VersionService {
   private apiUrl = "http://localhost:8000/versiones/"
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+  ) {}
 
   getVersionById(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}${id}`)
   }
 
   deleteVersionesByIdEntrada(idEntrada: string): Observable<any> {
-    const headers = new HttpHeaders({ "Content-Type": "application/json" })
+    const headers = {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
     const body = { idEntrada }
     return this.http.delete(this.apiUrl, { headers, body }).pipe(
       catchError((error) => {

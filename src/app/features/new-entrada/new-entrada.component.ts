@@ -12,6 +12,7 @@ import { NewVersionComponent } from "../new-version/new-version.component"
 import { MapasComponent } from "../mapas/mapas.component"
 import { BotonAtrasComponent } from "@shared/components/boton-atras/boton-atras.component"
 import { TranslatePipe } from "@ngx-translate/core"
+import { UserService } from "@app/core/services/user.service"
 
 @Component({
   selector: "app-new-entrada",
@@ -37,13 +38,14 @@ export class NewEntradaComponent {
 
   constructor(
     private newEntradaService: NewEntradaService,
+    private userSerive: UserService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
   ) {
     this.entradaForm = this.fb.group({
       nombre: ["", Validators.required],
-      nombreUsuario: ["Usuario", Validators.required], // TO-DO
-      idUsuario: ["673d2a12ada998325690b320", Validators.required], // TO-DO
+      nombreUsuario: ["", Validators.required], // TO-DO
+      idUsuario: ["", Validators.required], // TO-DO
       idWiki: ["", Validators.required],
       version: this.fb.group({
         contenido: ["", Validators.required],
@@ -58,6 +60,10 @@ export class NewEntradaComponent {
   }
 
   ngOnInit(): void {
+    this.entradaForm.patchValue({
+      idUsuario: this.userSerive.getUser()?.id,
+      nombreUsuario: this.userSerive.getUser()?.name,
+    })
     this.idWiki = this.route.snapshot.paramMap.get("idWiki")
     if (this.idWiki) {
       console.log("idWiki recibido:", this.idWiki)

@@ -21,11 +21,12 @@ export class PerfilComponent implements OnInit {
     private route: ActivatedRoute,
     private perfilService: PerfilService,
     private userService: UserService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.idUsuario = this.route.snapshot.paramMap.get("id")
     this.user = this.userService.getUser() || null
+    console.log(this.user?.name)
 
     if (this.idUsuario) {
       this.getUsuario()

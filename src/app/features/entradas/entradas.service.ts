@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core"
 import { HttpClient } from "@angular/common/http"
 import { Observable } from "rxjs"
 import { map } from "rxjs/operators"
+import { UserService } from "@app/core/services/user.service"
 
 @Injectable({
   providedIn: "root",
@@ -9,7 +10,10 @@ import { map } from "rxjs/operators"
 export class EntradasService {
   private apiUrl = "http://localhost:8000/entradas/"
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+  ) {}
 
   getEntradas(wikiId: string): Observable<any[]> {
     return this.http
@@ -22,6 +26,9 @@ export class EntradasService {
   }
 
   deleteEntrada(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}${id}`)
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
+    return this.http.delete(`${this.apiUrl}${id}`, { headers })
   }
 }

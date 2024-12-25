@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     private authService: AuthGoogleService,
     private userService: UserService,
     private router: Router,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     if (this.authService.getToken()) {
