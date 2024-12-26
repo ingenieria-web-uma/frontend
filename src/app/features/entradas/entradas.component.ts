@@ -7,7 +7,6 @@ import { BotonAtrasComponent } from "@shared/components/boton-atras/boton-atras.
 import { VersionService } from "../version/version.service"
 import { MapasService } from "../mapas/mapas.service"
 import { TranslatePipe } from "@ngx-translate/core"
-import { TraduccionesService } from "../traducciones/traducciones.service"
 
 @Component({
   selector: "app-entradas",
@@ -34,17 +33,14 @@ export class EntradasComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private datePipe: DatePipe,
-    private traduccionesService: TraduccionesService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // Captura el parámetro `id` de la URL
     this.wikiId = this.route.snapshot.paramMap.get("id")!
     this.entradasService.getWikiName(this.wikiId).subscribe({
-      next: async (data) => {
-        this.nombre_wiki = await this.traduccionesService.traducirTextoDirecto(
-          data["nombre"],
-        )
+      next: (data) => {
+        this.nombre_wiki = data["nombre"]
         this.imagenUrl = data["imagenUrl"]
         console.log("URL de la imagen:", this.imagenUrl)
       },
@@ -53,13 +49,8 @@ export class EntradasComponent implements OnInit {
       },
     })
     this.entradasService.getEntradas(this.wikiId).subscribe({
-      next: async (data) => {
+      next: (data) => {
         this.entradas = data
-        for (const entrada of data) {
-          entrada.nombre = await this.traduccionesService.traducirTextoDirecto(
-            entrada.nombre,
-          )
-        }
         this.entradasFiltradas = this.entradas
       },
       error: (err) => {

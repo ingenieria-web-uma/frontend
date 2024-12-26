@@ -9,7 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms"
-import { TranslatePipe } from "@ngx-translate/core"
+import { TranslatePipe, TranslateService } from "@ngx-translate/core"
 import { UserService } from "@core/services/user.service"
 
 @Component({
@@ -29,6 +29,7 @@ export class ComentariosComponent {
     private userService: UserService,
     private fb: FormBuilder,
     private datePipe: DatePipe,
+    private translateService: TranslateService,
   ) {
     this.comentarioForm = this.fb.group({
       contenido: ["", Validators.required],
@@ -62,7 +63,8 @@ export class ComentariosComponent {
           },
           error: (err: any) => {
             console.error("Error al obtener el usuario:", err)
-            comentario["nombreUsuario"] = "Cuenta eliminada"
+            comentario["nombreUsuario"] =
+              this.translateService.instant("CUENTA_ELIMINADA")
           },
         })
     }

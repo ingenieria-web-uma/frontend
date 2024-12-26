@@ -13,7 +13,6 @@ import { BotonAtrasComponent } from "@shared/components/boton-atras/boton-atras.
 import { SubirImagenesComponent } from "@features/subir-imagenes/subir-imagenes.component" // Importa FormsModule
 import { SubirImagenesService } from "@features/subir-imagenes/subir-imagenes.service"
 import { TranslatePipe } from "@ngx-translate/core"
-import { TraduccionesService } from "@features/traducciones/traducciones.service"
 
 @Component({
   selector: "app-editar-wiki",
@@ -24,13 +23,13 @@ import { TraduccionesService } from "@features/traducciones/traducciones.service
     SubirImagenesComponent,
     ReactiveFormsModule,
     TranslatePipe,
-  ], // Asegúrate de incluir FormsModule aquí
+  ],
   templateUrl: "./editar-wiki.component.html",
 })
 export class EditorWikiComponent implements OnInit {
   wikiId!: string
   wikiForm: FormGroup
-  imageUrl = "" // Variable para almacenar la URL
+  imageUrl = ""
   antiguoNombreWiki = ""
   nombreWiki = ""
 
@@ -40,7 +39,6 @@ export class EditorWikiComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private imagenUrl: SubirImagenesService,
-    private traduccionesService: TraduccionesService,
   ) {
     this.wikiForm = this.fb.group({
       nombre: ["", Validators.required],
@@ -50,17 +48,12 @@ export class EditorWikiComponent implements OnInit {
   ngOnInit(): void {
     this.wikiId = this.route.snapshot.paramMap.get("idWiki")!
     this.WikisService.getWiki(this.wikiId).subscribe({
-      next: async (data) => {
+      next: (data) => {
         this.wikiForm.patchValue({
-          nombre: await this.traduccionesService.traducirTextoDirecto(
-            data.nombre,
-          ),
+          nombre: data.nombre,
         })
-        this.antiguoNombreWiki =
-          await this.traduccionesService.traducirTextoDirecto(data.nombre)
-        this.nombreWiki = await this.traduccionesService.traducirTextoDirecto(
-          data.nombre,
-        )
+        this.antiguoNombreWiki = data.nombre
+        this.nombreWiki = data.nombre
         this.imageUrl = data.imagenUrl
         console.log("Wiki:", data)
       },

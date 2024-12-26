@@ -3,11 +3,12 @@ import { Router } from "@angular/router"
 import { AuthGoogleService } from "@core/services/auth-google.service"
 import { User } from "@models/user.model"
 import { UserService } from "@core/services/user.service"
+import { TranslatePipe } from "@ngx-translate/core"
 
 @Component({
   selector: "app-bridge",
   standalone: true,
-  imports: [],
+  imports: [TranslatePipe],
   templateUrl: "./bridge.component.html",
 })
 export class BridgeComponent {

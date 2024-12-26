@@ -12,7 +12,7 @@ export class TraduccionesComponent implements OnInit {
   idiomasDisponibles: { code: string; name: string }[] = []
   idiomaActual = "es"
 
-  constructor(private traduccionesService: TraduccionesService) { }
+  constructor(private traduccionesService: TraduccionesService) {}
 
   ngOnInit(): void {
     const idiomaGuardado = localStorage.getItem("idiomaSeleccionado")
@@ -29,7 +29,7 @@ export class TraduccionesComponent implements OnInit {
     })
   }
 
-  cambiarIdioma(event: Event): void {
+  cambiarIdioma(_event: Event): void {
     localStorage.setItem("idiomaSeleccionado", this.idiomaActual)
 
     this.traduccionesService.traducirYActualizar(this.idiomaActual)
