@@ -39,13 +39,8 @@ export class WikisComponent implements OnInit {
 
   obtenerWikis(nombre = ""): void {
     this.wikisService.getWikis(nombre).subscribe({
-      next: async (data) => {
+      next: (data) => {
         this.wikis = data
-        for (const wiki of data) {
-          wiki.nombre = await this.traduccionesService.traducirTextoDirecto(
-            wiki.nombre,
-          )
-        }
         this.wikisFiltradas = this.wikis
       },
       error: (err) => {

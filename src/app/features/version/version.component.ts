@@ -4,7 +4,6 @@ import { CommonModule } from "@angular/common"
 import { DomSanitizer, SafeHtml } from "@angular/platform-browser"
 import { ActivatedRoute } from "@angular/router"
 import { TranslateDirective } from "@ngx-translate/core"
-import { TraduccionesService } from "../traducciones/traducciones.service"
 
 @Component({
   selector: "app-version",
@@ -23,17 +22,14 @@ export class VersionComponent implements OnInit {
     private versionService: VersionService,
     private route: ActivatedRoute,
     private sanatizer: DomSanitizer,
-    private traduccionesService: TraduccionesService,
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.idEntrada = this.route.snapshot.paramMap.get("id")!
     this.versionService.obtenerUltimaVersion(this.idEntrada).subscribe({
-      next: async (data) => {
+      next: (data) => {
         console.log("Datos de la versión", data)
-        this.contenido = await this.traduccionesService.traducirTextoDirecto(
-          data["contenido"],
-        )
+        this.contenido = data["contenido"]
         this.fechaEdicion = new Date(data["fechaEdicion"])
         this.contenidoSeguro = this.sanatizer.bypassSecurityTrustHtml(
           this.contenido,

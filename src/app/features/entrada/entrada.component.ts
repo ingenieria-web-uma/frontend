@@ -9,10 +9,12 @@ import { MapasService } from "../mapas/mapas.service"
 import { MapasComponent } from "../mapas/mapas.component"
 import { FormBuilder, FormGroup } from "@angular/forms"
 import { UsuarioService } from "../usuario/usuario.service"
-import { TranslatePipe } from "@ngx-translate/core"
+import { TranslatePipe, TranslateService } from "@ngx-translate/core"
 import { TraduccionesService } from "../traducciones/traducciones.service"
 import { UserService } from "@app/core/services/user.service"
 import { User } from "@app/models/user.model"
+import { VersionService } from "../version/version.service"
+import { NewVersionComponent } from "../new-version/new-version.component"
 
 @Component({
   selector: "app-entrada",
@@ -30,6 +32,7 @@ import { User } from "@app/models/user.model"
 export class EntradaComponent implements OnInit {
   entradaForm: FormGroup
   entradaId!: string
+  idWiki!: string
   versionActualId!: string
   nombreEntrada = ""
   nombreUsuario = ""
@@ -39,6 +42,7 @@ export class EntradaComponent implements OnInit {
   role: User["role"] = "lector"
 
   @ViewChild(MapasComponent, { static: false }) mapasComponent!: MapasComponent
+  @ViewChild(NewVersionComponent) newVersionComponent!: NewVersionComponent
 
   constructor(
     private entradaService: EntradaService,
@@ -49,6 +53,8 @@ export class EntradaComponent implements OnInit {
     private fb: FormBuilder,
     private traduccionesService: TraduccionesService,
     private userService: UserService,
+    private translateService: TranslateService,
+    private versionService: VersionService,
   ) {
     this.entradaForm = this.fb.group({
       ubicacion: this.fb.group({
@@ -73,12 +79,38 @@ export class EntradaComponent implements OnInit {
     this.router.navigate([`/entrada/${this.entradaId}/editar`])
   }
 
+  async traducirEntrada() {
+    try {
+      const version = await this.versionService
+        .getVersionById(this.versionActualId)
+        .toPromise()
+
+      const nombreEntradaTraducido =
+        await this.traduccionesService.traducirTextoDirecto(this.nombreEntrada)
+      const contenidoVersionTraducido =
+        await this.traduccionesService.traducirTextoDirecto(version.contenido)
+
+      const ubicacion = this.entradaForm.get("ubicacion")?.value
+
+      this.router.navigate([`/wiki/${this.idWiki}/new_entrada`], {
+        queryParams: {
+          nombreEntrada: nombreEntradaTraducido,
+          contenidoVersion: contenidoVersionTraducido,
+          lat: ubicacion?.lat || "",
+          lon: ubicacion?.lon || "",
+        },
+      })
+    } catch (err) {
+      console.error("Error al traducir la entrada o al obtener el mapa:", err)
+    }
+  }
+
   private cargarEntrada() {
     this.entradaService.getEntradaById(this.entradaId).subscribe({
-      next: async (data) => {
+      next: (data) => {
+        this.idWiki = data["idWiki"]
         this.versionActualId = data["idVersionActual"]
-        this.nombreEntrada =
-          await this.traduccionesService.traducirTextoDirecto(data["nombre"])
+        this.nombreEntrada = data["nombre"]
         this.idUsuario = data["idUsuario"]
         this.fechaCreacion = new Date(data["fechaCreacion"])
         this.obtenerNombreUsuario(this.idUsuario)
@@ -96,7 +128,7 @@ export class EntradaComponent implements OnInit {
       },
       error: (err) => {
         console.error("Error al obtener el usuario:", err)
-        this.nombreUsuario = "Desconocido"
+        this.nombreUsuario = this.translateService.instant("DESCONOCIDO")
       },
     })
   }

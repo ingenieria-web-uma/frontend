@@ -6,7 +6,7 @@ import {
   Validators,
   ReactiveFormsModule,
 } from "@angular/forms"
-import { ActivatedRoute } from "@angular/router"
+import { ActivatedRoute, RouterModule } from "@angular/router"
 import { NewEntradaService } from "./new-entrada.service"
 import { NewVersionComponent } from "../new-version/new-version.component"
 import { MapasComponent } from "../mapas/mapas.component"
@@ -23,6 +23,7 @@ import { UserService } from "@app/core/services/user.service"
     MapasComponent,
     BotonAtrasComponent,
     TranslatePipe,
+    RouterModule,
   ],
   templateUrl: "./new-entrada.component.html",
 })
@@ -71,6 +72,21 @@ export class NewEntradaComponent {
     } else {
       console.error("idWiki no proporcionado")
     }
+
+    this.route.queryParams.subscribe((params) => {
+      if (params["nombreEntrada"] && params["contenidoVersion"]) {
+        this.entradaForm.patchValue({
+          nombre: params["nombreEntrada"],
+          version: { contenido: params["contenidoVersion"] },
+        })
+      }
+      if (params["lat"] && params["lon"]) {
+        this.entradaForm.patchValue({
+          mapa: { ubicacion: { lat: params["lat"], lon: params["lon"] } },
+        })
+        this.mostrarMapa = true
+      }
+    })
   }
 
   toggleMapa(): void {

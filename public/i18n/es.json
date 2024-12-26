@@ -64,5 +64,12 @@
     "SUBIR": "Subir",
     "ESCRIBE_COMENTARIO": "Escribe tu comentario...",
     "MAPA": "Mapa",
-    "ESCRIBE_NUEVO_NOMBRE": "Escribe el nuevo nombre aquí"
+    "ESCRIBE_NUEVO_NOMBRE": "Escribe el nuevo nombre aquí",
+    "INICIAR_SESION_GOOGLE": "Iniciar sesión con Google",
+    "CONTINUAR_COMO_INVITADO": "Continuar como invitado",
+    "TERMINOS_CONDICIONES": "Al iniciar sesión, aceptas nuestros términos y condiciones.",
+    "BIENVENIDA_LAWIKI": "Bienvenido a LaWiki",
+    "CARGANDO": "Estamos cargando la wiki para ti :)",
+    "TRADUCIR_ENTRADA": "Traducir",
+    "CUENTA_ELIMINADA": "Cuenta eliminada"
 }

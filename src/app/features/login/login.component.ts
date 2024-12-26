@@ -6,8 +6,9 @@ import { MatButtonModule } from "@angular/material/button"
 import { MatIconModule } from "@angular/material/icon"
 import { AuthGoogleService } from "@core/services/auth-google.service"
 import { Router } from "@angular/router"
-import { LoginService } from "@core/services/login.service"
 import { UserService } from "@app/core/services/user.service"
+import { TranslatePipe } from "@ngx-translate/core"
+import { TraduccionesComponent } from "../traducciones/traducciones.component"
 
 const MODULES: any[] = [
   MatButtonModule,
@@ -15,14 +16,15 @@ const MODULES: any[] = [
   MatFormFieldModule,
   FormsModule,
   ReactiveFormsModule,
+  TranslatePipe,
+  TraduccionesComponent,
 ]
 
 @Component({
   selector: "app-login",
   standalone: true,
-  imports: [MODULES],
+  imports: [MODULES, TraduccionesComponent],
   templateUrl: "./login.component.html",
-  // styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
   constructor(
