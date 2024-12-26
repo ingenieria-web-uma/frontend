@@ -4,6 +4,7 @@ import { FormsModule } from "@angular/forms"
 import { CommonModule } from "@angular/common"
 import { SubirImagenesService } from "./subir-imagenes.service"
 import { TranslatePipe } from "@ngx-translate/core"
+import { UserService } from "@app/core/services/user.service"
 
 @Component({
   selector: "app-subir-imagenes",
@@ -16,7 +17,10 @@ export class SubirImagenesComponent {
   selectedFile: File | null = null
   mensaje = ""
 
-  constructor(private imageUrl: SubirImagenesService) { }
+  constructor(
+    private imageUrl: SubirImagenesService,
+    private userService: UserService,
+  ) {}
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement
@@ -29,11 +33,15 @@ export class SubirImagenesComponent {
     if (this.selectedFile) {
       const formData = new FormData()
       formData.append("archivo", this.selectedFile)
+      const headers = {
+        Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+      }
 
       try {
         const response = await fetch("http://localhost:8000/archivos/subir", {
           method: "POST",
           body: formData,
+          headers,
         })
 
         if (!response.ok) {

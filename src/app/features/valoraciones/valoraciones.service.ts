@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http"
 import { Injectable } from "@angular/core"
+import { UserService } from "@app/core/services/user.service"
 import { map, Observable } from "rxjs"
 
 @Injectable({
@@ -8,7 +9,10 @@ import { map, Observable } from "rxjs"
 export class ValoracionesService {
   private apiUrl = "http://localhost:8000/valoraciones/"
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+  ) {}
 
   getValoraciones(params: { [key: string]: any }): Observable<any[]> {
     const httpParams = new HttpParams({ fromObject: params })
@@ -18,10 +22,16 @@ export class ValoracionesService {
   }
 
   createValoracion(data: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}`, data)
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
+    return this.http.post<any>(`${this.apiUrl}`, data, { headers })
   }
 
   updateValoracion(id: string, nota: number): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}${id}`, { nota })
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
+    return this.http.put<any>(`${this.apiUrl}${id}`, { nota }, { headers })
   }
 }

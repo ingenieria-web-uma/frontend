@@ -25,7 +25,7 @@
         </li>
         @if (usuarioEnSesion()) {
         @if (usuarioEsAdmin()) {
-        <li class="flex items-center">
+        <li *ngIf="this.role === 'admin'" class="flex items-center">
           <a routerLink="#" class="cursor-not-allowed text-gray-400">
             {{ "ADMINISTRAR_USUARIOS" | translate }}
           </a>

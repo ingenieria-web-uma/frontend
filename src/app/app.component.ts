@@ -1,22 +1,12 @@
 import { Component, OnInit } from "@angular/core"
 import { NavigationEnd, Router, RouterOutlet } from "@angular/router"
 import { BarraNavegacionComponent } from "@shared/components/barra-navegacion/barra-navegacion.component"
-import {
-  TranslateService,
-  TranslatePipe,
-  TranslateDirective,
-} from "@ngx-translate/core"
+import { TranslateService } from "@ngx-translate/core"
 import { NgIf } from "@angular/common"
 
 @Component({
   selector: "app-root",
-  imports: [
-    RouterOutlet,
-    BarraNavegacionComponent,
-    TranslatePipe,
-    TranslateDirective,
-    NgIf,
-  ],
+  imports: [RouterOutlet, BarraNavegacionComponent, NgIf],
   templateUrl: "./app.component.html",
 })
 export class AppComponent implements OnInit {

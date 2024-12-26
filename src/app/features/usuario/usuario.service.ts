@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
+import { UserService } from "@app/core/services/user.service"
 import { Observable } from "rxjs"
 
 @Injectable({
@@ -8,7 +9,10 @@ import { Observable } from "rxjs"
 export class UsuarioService {
   private apiUrl = "http://localhost:8000/usuarios/"
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+  ) {}
 
   // Método para obtener un usuario por su id
   getUsuario(id: string): Observable<any> {
@@ -17,11 +21,17 @@ export class UsuarioService {
 
   //Metodo para editar un usuario
   editUsuario(id: string, data: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}${id}`, data)
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
+    return this.http.put(`${this.apiUrl}${id}`, data, { headers })
   }
 
   // Método para eliminar un usuario
   deleteUsuario(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}${id}`)
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
+    return this.http.delete(`${this.apiUrl}${id}`, { headers })
   }
 }

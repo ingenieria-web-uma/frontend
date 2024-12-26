@@ -6,6 +6,8 @@ import { BarraBusquedaComponent } from "@shared/components/barra-busqueda/barra-
 import { BotonEditarComponent } from "@shared/components/boton-editar/boton-editar.component"
 import { TranslatePipe } from "@ngx-translate/core"
 import { TraduccionesService } from "../traducciones/traducciones.service"
+import { UserService } from "@app/core/services/user.service"
+import { User } from "@app/models/user.model"
 
 @Component({
   selector: "app-wikis",
@@ -21,14 +23,17 @@ export class WikisComponent implements OnInit {
   wikis: any[] = []
   wikisFiltradas: any[] = []
   textoBusqueda = ""
+  role: User["role"] = "lector"
 
   constructor(
     private wikisService: WikisService,
     private router: Router,
     private traduccionesService: TraduccionesService,
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
+    this.role = this.userService.getUser()?.role ?? "lector"
     this.obtenerWikis()
   }
 

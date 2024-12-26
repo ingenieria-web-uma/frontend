@@ -11,7 +11,7 @@
   <app-filter-entradas (filtroAplicado)="aplicarFiltro($event)" />
 </div>
 
-<div class="crearEntrada-button mt-4 flex justify-end px-2">
+<div *ngIf="this.role === 'admin' || this.role === 'redactor'" class="crearEntrada-button mt-4 flex justify-end px-2">
   <button (click)="crearEntrada()" class="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
     {{ "CREAR_ENTRADA" | translate }}
   </button>
@@ -31,7 +31,7 @@
           {{ formatearFecha(entrada.fechaCreacion) }}
         </p>
       </div>
-      <button (click)="borrarEntrada(entrada.id)"
+      <button *ngIf="this.role ==='admin'||this.role==='editor'" (click)="borrarEntrada(entrada.id)"
         class="w-[150px] rounded bg-red-300 px-4 py-1 text-white hover:bg-red-600" style="height: min-content">
         {{ "BORRAR" | translate }}
       </button>

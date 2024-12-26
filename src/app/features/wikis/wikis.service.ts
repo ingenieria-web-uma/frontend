@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core"
 import { HttpClient } from "@angular/common/http"
 import { Observable } from "rxjs"
 import { map } from "rxjs/operators"
+import { UserService } from "@app/core/services/user.service"
 
 @Injectable({
   providedIn: "root",
@@ -9,7 +10,10 @@ import { map } from "rxjs/operators"
 export class WikisService {
   private apiUrl = "http://localhost:8000/wikis/"
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private userService: UserService,
+  ) {}
 
   getWikis(nombre?: string): Observable<any[]> {
     let url = this.apiUrl
@@ -30,11 +34,17 @@ export class WikisService {
 
   //Metodo  para editar una wiki
   editWiki(id: string, data: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}${id}`, data)
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
+    return this.http.put(`${this.apiUrl}${id}`, data, { headers })
   }
 
   // Método para eliminar una wiki
   deleteWiki(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}${id}`)
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
+    return this.http.delete(`${this.apiUrl}${id}`, { headers })
   }
 }

@@ -7,8 +7,10 @@
     <h2 class="text-3xl font-bold text-gray-900">{{ nombreEntrada }}</h2>
 
     <div class="flex gap-2">
-      <app-boton-editar (click)="$event.stopPropagation(); editarEntrada()" />
-      <button (click)="verVersiones()" class="rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600">
+      <app-boton-editar *ngIf="this.role === 'admin' || this.role === 'redactor'"
+        (click)="$event.stopPropagation(); editarEntrada()" />
+      <button *ngIf="this.role === 'admin' || this.role === 'editor'" (click)="verVersiones()"
+        class="rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600">
         {{ "HISTORIAL_DE_VERSIONES" | translate }}
       </button>
     </div>

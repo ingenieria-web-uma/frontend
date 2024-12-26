@@ -11,6 +11,8 @@ import { FormBuilder, FormGroup } from "@angular/forms"
 import { UsuarioService } from "../usuario/usuario.service"
 import { TranslatePipe } from "@ngx-translate/core"
 import { TraduccionesService } from "../traducciones/traducciones.service"
+import { UserService } from "@app/core/services/user.service"
+import { User } from "@app/models/user.model"
 
 @Component({
   selector: "app-entrada",
@@ -34,6 +36,7 @@ export class EntradaComponent implements OnInit {
   idUsuario = ""
   fechaCreacion: Date = new Date()
   tieneMapa = false
+  role: User["role"] = "lector"
 
   @ViewChild(MapasComponent, { static: false }) mapasComponent!: MapasComponent
 
@@ -45,6 +48,7 @@ export class EntradaComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private traduccionesService: TraduccionesService,
+    private userService: UserService,
   ) {
     this.entradaForm = this.fb.group({
       ubicacion: this.fb.group({
@@ -55,6 +59,7 @@ export class EntradaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.role = this.userService.getUser()?.role ?? "lector"
     this.entradaId = this.route.snapshot.paramMap.get("id")!
     this.cargarEntrada()
     this.cargarMapa()

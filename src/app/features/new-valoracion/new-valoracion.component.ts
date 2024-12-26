@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from "@angular/core"
+import { Component, Output, EventEmitter, Input, OnInit } from "@angular/core"
 import {
   FormBuilder,
   FormGroup,
@@ -8,13 +8,15 @@ import {
 import { ValoracionesService } from "../valoraciones/valoraciones.service"
 import { CommonModule } from "@angular/common"
 import { TranslatePipe } from "@ngx-translate/core"
+import { UserService } from "@app/core/services/user.service"
+import { ActivatedRoute } from "@angular/router"
 
 @Component({
   selector: "app-new-valoracion",
   imports: [CommonModule, ReactiveFormsModule, TranslatePipe],
   templateUrl: "./new-valoracion.component.html",
 })
-export class NewValoracionComponent {
+export class NewValoracionComponent implements OnInit {
   @Input() idUsuarioValorado!: string
   @Output() valoracionCreada = new EventEmitter<any>()
 
@@ -24,11 +26,21 @@ export class NewValoracionComponent {
   constructor(
     private fb: FormBuilder,
     private valoracionesService: ValoracionesService,
+    private userService: UserService,
+    private route: ActivatedRoute,
   ) {
     this.valoracionForm = this.fb.group({
-      idUsuarioRedactor: ["67531570f5f5e7e16350da50", Validators.required],
+      idUsuarioRedactor: ["", Validators.required],
       idUsuarioValorado: ["", Validators.required],
       nota: [0, [Validators.required, Validators.min(1), Validators.max(5)]],
+    })
+  }
+
+  ngOnInit(): void {
+    const userIdFromUrl = this.route.snapshot.paramMap.get("id")
+    this.valoracionForm.patchValue({
+      idUsuarioRedactor: this.userService.getUser()?.id,
+      idUsuarioValorado: userIdFromUrl,
     })
   }
 

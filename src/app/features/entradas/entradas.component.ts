@@ -8,6 +8,8 @@ import { VersionService } from "../version/version.service"
 import { MapasService } from "../mapas/mapas.service"
 import { TranslatePipe } from "@ngx-translate/core"
 import { TraduccionesService } from "../traducciones/traducciones.service"
+import { UserService } from "@app/core/services/user.service"
+import { User } from "@app/models/user.model"
 
 @Component({
   selector: "app-entradas",
@@ -26,6 +28,7 @@ export class EntradasComponent implements OnInit {
   entradasFiltradas: any[] = []
   nombre_wiki = ""
   imagenUrl = ""
+  role: User["role"] = "lector"
 
   constructor(
     private entradasService: EntradasService,
@@ -35,10 +38,12 @@ export class EntradasComponent implements OnInit {
     private router: Router,
     private datePipe: DatePipe,
     private traduccionesService: TraduccionesService,
+    private userService: UserService,
   ) { }
 
   ngOnInit(): void {
     // Captura el parámetro `id` de la URL
+    this.role = this.userService.getUser()?.role ?? "lector"
     this.wikiId = this.route.snapshot.paramMap.get("id")!
     this.entradasService.getWikiName(this.wikiId).subscribe({
       next: async (data) => {
