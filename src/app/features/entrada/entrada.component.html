@@ -13,7 +13,7 @@
         class="rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-600">
         {{ "HISTORIAL_DE_VERSIONES" | translate }}
       </button>
-      <button *ngIf="this.role === 'admin' || this.role === 'redactor'" (click)="traducirEntrada()"
+      <button *ngIf="(this.role === 'admin' || this.role === 'redactor') && mostrarBotonTraducir" (click)="traducirEntrada()"
         class="rounded bg-green-500 px-4 py-2 font-semibold text-white hover:bg-green-600">
         {{ "TRADUCIR_ENTRADA" | translate }}
       </button>

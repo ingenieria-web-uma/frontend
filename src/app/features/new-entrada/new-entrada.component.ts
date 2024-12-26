@@ -11,7 +11,7 @@ import { NewEntradaService } from "./new-entrada.service"
 import { NewVersionComponent } from "../new-version/new-version.component"
 import { MapasComponent } from "../mapas/mapas.component"
 import { BotonAtrasComponent } from "@shared/components/boton-atras/boton-atras.component"
-import { TranslatePipe } from "@ngx-translate/core"
+import { TranslatePipe, TranslateService } from "@ngx-translate/core"
 import { UserService } from "@app/core/services/user.service"
 
 @Component({
@@ -42,12 +42,14 @@ export class NewEntradaComponent {
     private userSerive: UserService,
     private route: ActivatedRoute,
     private fb: FormBuilder,
+    private translateService: TranslateService,
   ) {
     this.entradaForm = this.fb.group({
       nombre: ["", Validators.required],
       nombreUsuario: ["", Validators.required], // TO-DO
       idUsuario: ["", Validators.required], // TO-DO
       idWiki: ["", Validators.required],
+      lang: [""],
       version: this.fb.group({
         contenido: ["", Validators.required],
       }),
@@ -72,6 +74,9 @@ export class NewEntradaComponent {
     } else {
       console.error("idWiki no proporcionado")
     }
+
+    const lang = this.translateService.currentLang || "es"
+    this.entradaForm.patchValue({ lang })
 
     this.route.queryParams.subscribe((params) => {
       if (params["nombreEntrada"] && params["contenidoVersion"]) {

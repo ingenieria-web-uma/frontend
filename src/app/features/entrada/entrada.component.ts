@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core"
+import { Component, OnInit, OnDestroy, ViewChild } from "@angular/core"
 import { ActivatedRoute, Router, RouterModule } from "@angular/router"
 import { EntradaService } from "./entrada.service"
 import { CommonModule } from "@angular/common"
@@ -15,6 +15,7 @@ import { UserService } from "@app/core/services/user.service"
 import { User } from "@app/models/user.model"
 import { VersionService } from "../version/version.service"
 import { NewVersionComponent } from "../new-version/new-version.component"
+import { Subscription } from "rxjs"
 
 @Component({
   selector: "app-entrada",
@@ -29,7 +30,7 @@ import { NewVersionComponent } from "../new-version/new-version.component"
   ],
   templateUrl: "./entrada.component.html",
 })
-export class EntradaComponent implements OnInit {
+export class EntradaComponent implements OnInit, OnDestroy {
   entradaForm: FormGroup
   entradaId!: string
   idWiki!: string
@@ -37,9 +38,12 @@ export class EntradaComponent implements OnInit {
   nombreEntrada = ""
   nombreUsuario = ""
   idUsuario = ""
+  lang = ""
   fechaCreacion: Date = new Date()
   tieneMapa = false
   role: User["role"] = "lector"
+  mostrarBotonTraducir = false
+  private langSubscription?: Subscription
 
   @ViewChild(MapasComponent, { static: false }) mapasComponent!: MapasComponent
   @ViewChild(NewVersionComponent) newVersionComponent!: NewVersionComponent
@@ -69,6 +73,17 @@ export class EntradaComponent implements OnInit {
     this.entradaId = this.route.snapshot.paramMap.get("id")!
     this.cargarEntrada()
     this.cargarMapa()
+
+    this.langSubscription = this.translateService.onLangChange.subscribe(() => {
+      this.mostrarBotonTraducir =
+        this.lang !== this.translateService.currentLang
+    })
+  }
+
+  ngOnDestroy(): void {
+    if (this.langSubscription) {
+      this.langSubscription.unsubscribe()
+    }
   }
 
   verVersiones() {
@@ -113,6 +128,9 @@ export class EntradaComponent implements OnInit {
         this.nombreEntrada = data["nombre"]
         this.idUsuario = data["idUsuario"]
         this.fechaCreacion = new Date(data["fechaCreacion"])
+        this.lang = data["lang"]
+        this.mostrarBotonTraducir =
+          this.lang !== this.translateService.currentLang
         this.obtenerNombreUsuario(this.idUsuario)
       },
       error: (err) => {

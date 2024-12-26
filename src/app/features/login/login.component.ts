@@ -8,7 +8,6 @@ import { AuthGoogleService } from "@core/services/auth-google.service"
 import { Router } from "@angular/router"
 import { UserService } from "@app/core/services/user.service"
 import { TranslatePipe } from "@ngx-translate/core"
-import { TraduccionesComponent } from "../traducciones/traducciones.component"
 
 const MODULES: any[] = [
   MatButtonModule,
@@ -17,13 +16,12 @@ const MODULES: any[] = [
   FormsModule,
   ReactiveFormsModule,
   TranslatePipe,
-  TraduccionesComponent,
 ]
 
 @Component({
   selector: "app-login",
   standalone: true,
-  imports: [MODULES, TraduccionesComponent],
+  imports: [MODULES],
   templateUrl: "./login.component.html",
 })
 export class LoginComponent implements OnInit {
