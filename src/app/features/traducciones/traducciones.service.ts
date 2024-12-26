@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core"
 import { TranslateService } from "@ngx-translate/core"
 import { HttpClient } from "@angular/common/http"
 import { firstValueFrom } from "rxjs"
+import { UserService } from "@app/core/services/user.service"
 
 @Injectable({
   providedIn: "root",
@@ -13,7 +14,8 @@ export class TraduccionesService {
   constructor(
     private http: HttpClient,
     private translate: TranslateService,
-  ) { }
+    private userService: UserService,
+  ) {}
 
   async traducirYActualizar(lang: string): Promise<void> {
     const defaultTexts = await firstValueFrom(this.http.get("/i18n/es.json"))
@@ -46,8 +48,11 @@ export class TraduccionesService {
       target_lang: targetLang,
     }
 
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+    }
     const response = await firstValueFrom(
-      this.http.post<any>(`${this.apiUrl}/traducir`, body),
+      this.http.post<any>(`${this.apiUrl}/traducir`, body, { headers }),
     )
 
     return response.translations
@@ -78,11 +83,14 @@ export class TraduccionesService {
       target_lang: lang,
     }
 
+    const headers = {
+      Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
+      "Content-Type": "application/json",
+    }
+
     try {
       const response = await firstValueFrom(
-        this.http.post<any>(`${this.apiUrl}/traducir`, body, {
-          headers: { "Content-Type": "application/json" },
-        }),
+        this.http.post<any>(`${this.apiUrl}/traducir`, body, { headers }),
       )
 
       const traduccion = response.translations[texto]
