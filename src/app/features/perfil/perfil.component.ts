@@ -1,15 +1,16 @@
 import { Component, OnInit } from "@angular/core"
 import { ActivatedRoute, RouterModule } from "@angular/router"
-import { PerfilService } from "./perfil.service"
 import { TranslatePipe } from "@ngx-translate/core"
 import { UserService } from "@core/services/user.service"
 import { User } from "@models/user.model"
 import { NgIf } from "@angular/common"
+import { FormsModule } from "@angular/forms"
+import { UsuarioService } from "../usuario/usuario.service"
 
 @Component({
   selector: "app-perfil",
   standalone: true,
-  imports: [RouterModule, TranslatePipe, NgIf],
+  imports: [RouterModule, TranslatePipe, NgIf, FormsModule],
   templateUrl: "./perfil.component.html",
 })
 export class PerfilComponent implements OnInit {
@@ -19,7 +20,7 @@ export class PerfilComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private perfilService: PerfilService,
+    private usuarioService: UsuarioService,
     private userService: UserService,
   ) {}
 
@@ -35,12 +36,31 @@ export class PerfilComponent implements OnInit {
 
   getUsuario(): void {
     if (this.idUsuario) {
-      this.perfilService.getUsuario(this.idUsuario).subscribe({
+      this.usuarioService.getUsuario(this.idUsuario).subscribe({
         next: (data) => {
           this.usuarioData = data
+          if (this.user) {
+            this.user.wantsEmailNotifications = data.wants_emails
+          }
         },
         error: (err) => {
           console.error("Error al obtener los datos del usuario:", err)
+        },
+      })
+    }
+  }
+
+  toggleNotificaciones(): void {
+    if (this.user && this.user.id) {
+      const newValue = !this.user.wantsEmailNotifications
+      this.usuarioService.updateWantsEmails(this.user.id, newValue).subscribe({
+        next: () => {
+          if (this.user) {
+            this.user.wantsEmailNotifications = newValue
+          }
+        },
+        error: (err) => {
+          console.error("Error al actualizar las notificaciones:", err)
         },
       })
     }

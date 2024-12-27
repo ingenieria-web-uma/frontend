@@ -37,11 +37,13 @@
       <span class="text-lg font-medium text-gray-600">{{
         "NOTIFICACIONES_EMAIL" | translate
         }}</span>
-      <span class="text-lg text-gray-800">{{
-        user?.wantsEmailNotifications === true
-        ? ("SI" | translate)
-        : ("NO" | translate)
-        }}</span>
+      <label class="relative inline-flex cursor-pointer items-center">
+        <input type="checkbox"
+               class="peer sr-only"
+               [ngModel]="user?.wantsEmailNotifications"
+               (change)="toggleNotificaciones()">
+        <div class="peer h-6 w-11 rounded-full bg-gray-200 after:absolute after:left-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300"></div>
+      </label>
     </div>
   </div>
 
@@ -49,10 +51,6 @@
     <button class="rounded-md bg-green-600 px-6 py-2 text-white transition duration-200 hover:bg-green-700"
       [routerLink]="['/usuario', idUsuario]">
       {{ "MIS_VALORACIONES" | translate }}
-    </button>
-
-    <button class="rounded-md bg-blue-600 px-6 py-2 text-white transition duration-200 hover:bg-blue-700">
-      {{ "EDITAR_PERFIL" | translate }}
     </button>
   </div>
 </div>

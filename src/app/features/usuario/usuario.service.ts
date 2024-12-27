@@ -19,12 +19,13 @@ export class UsuarioService {
     return this.http.get(`${this.apiUrl}${id}`)
   }
 
-  //Metodo para editar un usuario
-  editUsuario(id: string, data: any): Observable<any> {
+  // Método para actualizar solo las notificaciones (wants_emails)
+  updateWantsEmails(id: string, wantsEmails: boolean): Observable<any> {
     const headers = {
       Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
     }
-    return this.http.put(`${this.apiUrl}${id}`, data, { headers })
+    const data = { wants_emails: wantsEmails }
+    return this.http.put(`${this.apiUrl}${id}/wants_emails`, data, { headers })
   }
 
   // Método para eliminar un usuario
