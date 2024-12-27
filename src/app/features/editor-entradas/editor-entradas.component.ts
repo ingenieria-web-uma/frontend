@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from "@angular/router"
 import { Observable } from "rxjs"
 import { HttpClient } from "@angular/common/http"
 import { UserService } from "@app/core/services/user.service"
+import { environment as env } from "@env/environment"
 
 @Component({
   selector: "app-editor-entradas",
@@ -51,7 +52,7 @@ export class EditorEntradasComponent implements OnInit {
   }
 
   obtenerUltimaVersion(idEntrada: string): Observable<any> {
-    const url = "http://localhost:8000/entradas/"
+    const url = `${env.BACKEND_URL}/entradas/`
     return this.http.get<{ versiones: any[] }>(
       url + idEntrada + "/last-version",
     )
@@ -61,7 +62,7 @@ export class EditorEntradasComponent implements OnInit {
     const headers = {
       Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
     }
-    const url = "http://localhost:8000/entradas/"
+    const url = `${env.BACKEND_URL}/entradas/`
     this.http
       .put(
         url + this.idEntrada,
@@ -89,7 +90,7 @@ export class EditorEntradasComponent implements OnInit {
     const headers = {
       Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
     }
-    const url = "http://localhost:8000/versiones/"
+    const url = `${env.BACKEND_URL}/versiones/`
     this.http.post(url, body, { headers }).subscribe({
       next: (data: any) => {
         console.log("Versión guardada correctamente:", data)

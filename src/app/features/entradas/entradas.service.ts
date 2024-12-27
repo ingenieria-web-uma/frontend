@@ -3,12 +3,13 @@ import { HttpClient } from "@angular/common/http"
 import { Observable } from "rxjs"
 import { map } from "rxjs/operators"
 import { UserService } from "@app/core/services/user.service"
+import { environment as env } from "@env/environment"
 
 @Injectable({
   providedIn: "root",
 })
 export class EntradasService {
-  private apiUrl = "http://localhost:8000/entradas/"
+  private apiUrl = `${env.BACKEND_URL}/entradas/`
 
   constructor(
     private http: HttpClient,
@@ -22,7 +23,7 @@ export class EntradasService {
   }
 
   getWikiName(wikiId: string): Observable<any> {
-    return this.http.get("http://localhost:8000/wikis/" + wikiId)
+    return this.http.get(`${env.BACKEND_URL}/wikis/` + wikiId)
   }
 
   deleteEntrada(id: string): Observable<any> {

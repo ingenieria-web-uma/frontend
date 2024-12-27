@@ -5,6 +5,7 @@ import { CommonModule } from "@angular/common"
 import { SubirImagenesService } from "./subir-imagenes.service"
 import { TranslatePipe } from "@ngx-translate/core"
 import { UserService } from "@app/core/services/user.service"
+import { environment as env } from "@env/environment"
 
 @Component({
   selector: "app-subir-imagenes",
@@ -38,7 +39,7 @@ export class SubirImagenesComponent {
       }
 
       try {
-        const response = await fetch("http://localhost:8000/archivos/subir", {
+        const response = await fetch(`${env.BACKEND_URL}/archivos/subir`, {
           method: "POST",
           body: formData,
           headers,

@@ -3,12 +3,13 @@ import { HttpClient } from "@angular/common/http"
 import { Observable } from "rxjs"
 import { map } from "rxjs/operators"
 import { UserService } from "@app/core/services/user.service"
+import { environment as env } from "@env/environment"
 
 @Injectable({
   providedIn: "root",
 })
 export class WikisService {
-  private apiUrl = "http://localhost:8000/wikis/"
+  private apiUrl = `${env.BACKEND_URL}/wikis/`
 
   constructor(
     private http: HttpClient,

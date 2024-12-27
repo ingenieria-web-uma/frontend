@@ -3,18 +3,19 @@ import { HttpClient } from "@angular/common/http"
 import { Observable } from "rxjs"
 import { map } from "rxjs/operators"
 import { UserService } from "@core/services/user.service"
+import { environment as env } from "@env/environment"
 
 @Injectable({
   providedIn: "root",
 })
 export class ComentariosService {
-  private apiUrl = "http://localhost:8000/comentarios/"
-  private apiUrlUsuarios = "http://localhost:8000/usuarios/"
+  private apiUrl = `${env.BACKEND_URL}/comentarios/`
+  private apiUrlUsuarios = `${env.BACKEND_URL}/usuarios/`
 
   constructor(
     private http: HttpClient,
     private userService: UserService,
-  ) { }
+  ) {}
 
   getComentarios(idEntrada: string): Observable<any[]> {
     return this.http

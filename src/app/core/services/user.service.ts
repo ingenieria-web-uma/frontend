@@ -2,12 +2,13 @@ import { Injectable } from "@angular/core"
 import { BehaviorSubject, Observable } from "rxjs"
 import { User } from "@models/user.model"
 import { HttpClient } from "@angular/common/http"
+import { environment as env } from "@env/environment"
 
 @Injectable({
   providedIn: "root",
 })
 export class UserService {
-  private apiUrl = "http://localhost:8000/usuarios/"
+  private apiUrl = `${env.BACKEND_URL}/usuarios/`
   private user$: BehaviorSubject<User | null>
   private user: User | null = null
 

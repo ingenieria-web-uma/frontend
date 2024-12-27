@@ -2,12 +2,13 @@ import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { UserService } from "@app/core/services/user.service"
 import { Observable } from "rxjs"
+import { environment as env } from "@env/environment"
 
 @Injectable({
   providedIn: "root",
 })
 export class SubirImagenesService {
-  private apiUrl = "http://localhost:8000/archivos/subir"
+  private apiUrl = `${env.BACKEND_URL}/archivos/subir`
 
   constructor(
     private http: HttpClient,

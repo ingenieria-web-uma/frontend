@@ -2,12 +2,13 @@ import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { UserService } from "@app/core/services/user.service"
 import { map } from "rxjs/operators"
+import { environment as env } from "@env/environment"
 
 @Injectable({
   providedIn: "root",
 })
 export class HistorialVersionesService {
-  private apiUrl = "http://localhost:8000/"
+  private apiUrl = `${env.BACKEND_URL}/`
 
   constructor(
     private http: HttpClient,

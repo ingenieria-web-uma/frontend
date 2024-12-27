@@ -2,12 +2,13 @@ import { Injectable } from "@angular/core"
 import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { catchError, Observable, throwError } from "rxjs"
 import { UserService } from "@app/core/services/user.service"
+import { environment as env } from "@env/environment"
 
 @Injectable({
   providedIn: "root",
 })
 export class VersionService {
-  private apiUrl = "http://localhost:8000/versiones/"
+  private apiUrl = `${env.BACKEND_URL}/versiones/`
 
   constructor(
     private http: HttpClient,
@@ -32,7 +33,7 @@ export class VersionService {
     )
   }
   obtenerUltimaVersion(idEntrada: string): Observable<any> {
-    const url = "http://localhost:8000/entradas/"
+    const url = `${env.BACKEND_URL}/entradas/`
     return this.http.get<{ versiones: any[] }>(
       url + idEntrada + "/last-version",
     )

@@ -2,12 +2,13 @@ import { HttpClient, HttpParams } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { UserService } from "@app/core/services/user.service"
 import { map, Observable } from "rxjs"
+import { environment as env } from "@env/environment"
 
 @Injectable({
   providedIn: "root",
 })
 export class ValoracionesService {
-  private apiUrl = "http://localhost:8000/valoraciones/"
+  private apiUrl = `${env.BACKEND_URL}/valoraciones/`
 
   constructor(
     private http: HttpClient,

@@ -3,12 +3,13 @@ import { TranslateService } from "@ngx-translate/core"
 import { HttpClient } from "@angular/common/http"
 import { firstValueFrom } from "rxjs"
 import { UserService } from "@app/core/services/user.service"
+import { environment as env } from "@env/environment"
 
 @Injectable({
   providedIn: "root",
 })
 export class TraduccionesService {
-  private apiUrl = "http://localhost:8000/traducciones"
+  private apiUrl = `${env.BACKEND_URL}/traducciones`
   private cache: { [key: string]: any } = {}
 
   constructor(

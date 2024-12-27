@@ -2,12 +2,13 @@ import { Injectable } from "@angular/core"
 import { HttpClient } from "@angular/common/http"
 import { Observable } from "rxjs"
 import { UserService } from "@core/services/user.service"
+import { environment as env } from "@env/environment"
 
 @Injectable({
   providedIn: "root",
 })
 export class NotificacionesService {
-  private apiURL = "http://localhost:8000/notificaciones"
+  private apiURL = `${env.BACKEND_URL}/notificaciones`
 
   constructor(
     private http: HttpClient,

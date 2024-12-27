@@ -2,12 +2,13 @@ import { HttpClient, HttpHeaders } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { UserService } from "@app/core/services/user.service"
 import { catchError, Observable, throwError } from "rxjs"
+import { environment as env } from "@env/environment"
 
 @Injectable({
   providedIn: "root",
 })
 export class NewVersionService {
-  private apiUrl = "http://localhost:8000/versiones/"
+  private apiUrl = `${env.BACKEND_URL}/versiones/`
 
   constructor(
     private http: HttpClient,
