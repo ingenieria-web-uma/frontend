@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core"
-import { ActivatedRoute, RouterModule } from "@angular/router"
+import { ActivatedRoute, Router, RouterModule } from "@angular/router"
 import { HistorialVersionesService } from "./historial-versiones.service"
 import { TranslatePipe } from "@ngx-translate/core"
 
@@ -15,7 +15,8 @@ export class HistorialVersionesComponent implements OnInit {
   constructor(
     private historialVersionesService: HistorialVersionesService,
     private route: ActivatedRoute,
-  ) { }
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     const entradaId = this.route.snapshot.paramMap.get("id")!
@@ -71,6 +72,19 @@ export class HistorialVersionesComponent implements OnInit {
     }).format(date)
   }
 
-  // verVersion(idVersion: any) {
-  // }
+  restaurarVersion(version: any): void {
+    const fechaActual = new Date().toISOString()
+    this.historialVersionesService
+      .updateFechaEdicion(version._id, fechaActual)
+      .subscribe({
+        next: (data) => {
+          console.log("Fecha de edición actualizada:", data)
+          version.fechaEdicion = fechaActual
+          this.router.navigate([this.router.url.replace("/historial", "")])
+        },
+        error: (err) => {
+          console.error("Error al actualizar la fecha de edición:", err)
+        },
+      })
+  }
 }
