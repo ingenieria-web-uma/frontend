@@ -11,7 +11,6 @@ import { TranslatePipe } from "@ngx-translate/core"
   imports: [CommonModule, TranslatePipe],
   standalone: true,
   templateUrl: "./notificaciones.component.html",
-  styleUrls: ["./notificaciones.component.scss"],
 })
 export class NotificacionesComponent implements OnInit {
   notificaciones: any[] = []
