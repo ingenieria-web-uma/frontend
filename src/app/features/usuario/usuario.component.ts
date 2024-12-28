@@ -5,6 +5,7 @@ import { ValoracionesComponent } from "../valoraciones/valoraciones.component"
 import { CommonModule } from "@angular/common"
 import { NewValoracionComponent } from "../new-valoracion/new-valoracion.component"
 import { TranslatePipe } from "@ngx-translate/core"
+import { UserService } from "@app/core/services/user.service"
 
 @Component({
   selector: "app-usuario",
@@ -18,6 +19,7 @@ import { TranslatePipe } from "@ngx-translate/core"
 })
 export class UsuarioComponent implements OnInit {
   idUsuario: string | null = null
+  idUsuarioSesion: string | null = null
   usuarioData: any
   reputacionMedia = 0
   estrellas: string[] = []
@@ -27,10 +29,12 @@ export class UsuarioComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private usuarioService: UsuarioService,
-  ) { }
+    private userService: UserService,
+  ) {}
 
   ngOnInit(): void {
     this.idUsuario = this.route.snapshot.paramMap.get("id")
+    this.idUsuarioSesion = this.userService.getUser()?.id ?? null
 
     if (this.idUsuario) {
       this.getUsuario()
