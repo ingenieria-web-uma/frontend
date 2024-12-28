@@ -50,6 +50,10 @@ export class BarraNavegacionComponent implements OnInit {
     this.router.navigate(["/perfil/" + this.userService.getUser()?.id])
   }
 
+  irAAdministrarUsuarios() {
+    this.router.navigate(["/administrar_usuarios"])
+  }
+
   irALogIn() {
     this.router.navigate(["/login"])
   }

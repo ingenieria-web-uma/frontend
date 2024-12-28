@@ -12,6 +12,7 @@ import { PerfilComponent } from "@features/perfil/perfil.component"
 import { UsuarioComponent } from "@features/usuario/usuario.component"
 import { LoginComponent } from "@features/login/login.component"
 import { BridgeComponent } from "@features/bridge/bridge.component"
+import { AdministrarUsuariosComponent } from "./features/administrar-usuarios/administrar-usuarios.component"
 
 export const routes: Routes = [
   { path: "", component: WikisComponent },
@@ -26,6 +27,7 @@ export const routes: Routes = [
   { path: "entrada/:id/historial", component: HistorialVersionesComponent },
   { path: "perfil/:id", component: PerfilComponent },
   { path: "usuario/:id", component: UsuarioComponent },
+  { path: "administrar_usuarios", component: AdministrarUsuariosComponent },
   { path: "**", redirectTo: "" },
   // otras rutas
 ]

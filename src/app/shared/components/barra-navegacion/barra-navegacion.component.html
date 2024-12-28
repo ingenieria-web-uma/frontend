@@ -25,10 +25,10 @@
           </div>
         </li>
         @if (usuarioEsAdmin()) {
-        <li *ngIf="this.role === 'admin'" class="flex items-center">
-          <a routerLink="#" class="cursor-not-allowed text-gray-400">
+        <li class="flex items-center">
+          <button class="text-gray-800 hover:text-blue-600" (click)="irAAdministrarUsuarios()">
             {{ "ADMINISTRAR_USUARIOS" | translate }}
-          </a>
+          </button>
         </li>
         }
         <li class="flex items-center">
