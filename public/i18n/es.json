@@ -71,5 +71,10 @@
     "USUARIO:": "Usuario:",
     "VALORACIONES": "Valoraciones",
     "VALORACION": "Valoración",
-    "VOLVER": "Volver"
+    "VOLVER": "Volver",
+    "admin": "Administrador",
+    "redactor": "Redactor",
+    "editor": "Editor",
+    "lector": "Lector",
+    "CARGANDO_USUARIOS": "Cargando usuarios..."
 }

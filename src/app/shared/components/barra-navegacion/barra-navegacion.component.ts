@@ -16,7 +16,6 @@ import { NgIf } from "@angular/common"
     TranslatePipe,
     TraduccionesComponent,
     RouterModule,
-    NgIf,
   ],
   templateUrl: "./barra-navegacion.component.html",
 })
@@ -33,11 +32,12 @@ export class BarraNavegacionComponent implements OnInit {
   }
 
   usuarioEnSesion() {
-    return true
+    const user = this.userService.getUser()
+    return user !== null && user.id !== "";
   }
 
   usuarioEsAdmin() {
-    return true
+    return this.role === 'admin'
   }
 
   logOut() {
@@ -48,5 +48,9 @@ export class BarraNavegacionComponent implements OnInit {
 
   irAPerfil() {
     this.router.navigate(["/perfil/" + this.userService.getUser()?.id])
+  }
+
+  irALogIn() {
+    this.router.navigate(["/login"])
   }
 }

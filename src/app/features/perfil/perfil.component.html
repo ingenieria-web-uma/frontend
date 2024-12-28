@@ -30,7 +30,7 @@
       <span class="text-lg font-medium text-gray-600">{{
         "ROL" | translate
         }}</span>
-      <span class="text-lg text-gray-800">{{ user?.role }}</span>
+      <span class="text-lg text-gray-800">{{ (user?.role || '') | translate }}</span>
     </div>
 
     <div class="flex items-center justify-between">

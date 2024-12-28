@@ -53,6 +53,7 @@ export class HistorialVersionesComponent implements OnInit {
         .subscribe({
           next: (data: any) => {
             version["nombreUsuario"] = data["name"]
+            version["profilePicture"] = data["profile_picture"]
           },
           error: (err: any) => {
             console.error("Error al obtener el usuario:", err)
