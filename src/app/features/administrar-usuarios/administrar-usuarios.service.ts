@@ -1,13 +1,14 @@
 import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 import { UserService } from "@app/core/services/user.service"
+import { environment as env } from "@env/environment"
 import { map } from "rxjs/operators"
 
 @Injectable({
   providedIn: "root",
 })
 export class AdministrarUsuariosService {
-  private apiUrl = "http://localhost:8000/"
+  private apiUrl = `${env.BACKEND_URL}/`
 
   constructor(
     private http: HttpClient,
@@ -29,9 +30,9 @@ export class AdministrarUsuariosService {
     }
 
     return this.http.put(
-      `${this.apiUrl}usuarios/${id}`, 
+      `${this.apiUrl}usuarios/${id}`,
       {
-        role: rol
+        role: rol,
       },
       { headers },
     )
@@ -42,9 +43,6 @@ export class AdministrarUsuariosService {
       Authorization: `Bearer ${this.userService.getUser()?.oauth.access_token}`,
     }
 
-    return this.http.delete(
-      `${this.apiUrl}usuarios/${id}`,
-      { headers },
-    )
+    return this.http.delete(`${this.apiUrl}usuarios/${id}`, { headers })
   }
 }

@@ -5,6 +5,7 @@ import { CommonModule } from "@angular/common"
 import { Subscription } from "rxjs"
 import { HttpClient } from "@angular/common/http"
 import { TranslatePipe } from "@ngx-translate/core"
+import { environment as env } from "@env/environment"
 
 @Component({
   selector: "app-notificaciones",
@@ -109,44 +110,43 @@ export class NotificacionesComponent implements OnInit {
   }
 
   redirigirEntrada(notificacion: any): void {
-    this.http
-      .get(`http://localhost:8000/entradas/${notificacion.entrada_id}`)
-      .subscribe({
-        next: () => {
-          if (!notificacion.is_read) {
-            this.notificacionesService
-              .markAsRead(notificacion._id)
-              .subscribe(() => {
-                notificacion.is_read = true
-                this.notificacionesSinLeer--
-                this.router
-                  .navigateByUrl(`/entrada/${notificacion.entrada_id}`)
-                  .then(() => {
-                    window.location.reload()
-                  })
-                this.filtrarNotificaciones(this.filtroActual)
-              })
-          } else {
-            this.router
-              .navigateByUrl(`/entrada/${notificacion.entrada_id}`)
-              .then(() => {
-                window.location.reload()
-              })
-            this.filtrarNotificaciones(this.filtroActual)
-          }
-        },
-        error: () => {
-          if (!notificacion.is_read) {
-            this.notificacionesService
-              .markAsRead(notificacion._id)
-              .subscribe(() => {
-                notificacion.is_read = true
-                this.notificacionesSinLeer--
-                this.filtrarNotificaciones(this.filtroActual)
-              })
-          }
-        },
-      })
+    const apiUrl = `${env.BACKEND_URL}/entradas/`
+    this.http.get(`${apiUrl}${notificacion.entrada_id}`).subscribe({
+      next: () => {
+        if (!notificacion.is_read) {
+          this.notificacionesService
+            .markAsRead(notificacion._id)
+            .subscribe(() => {
+              notificacion.is_read = true
+              this.notificacionesSinLeer--
+              this.router
+                .navigateByUrl(`/entrada/${notificacion.entrada_id}`)
+                .then(() => {
+                  window.location.reload()
+                })
+              this.filtrarNotificaciones(this.filtroActual)
+            })
+        } else {
+          this.router
+            .navigateByUrl(`/entrada/${notificacion.entrada_id}`)
+            .then(() => {
+              window.location.reload()
+            })
+          this.filtrarNotificaciones(this.filtroActual)
+        }
+      },
+      error: () => {
+        if (!notificacion.is_read) {
+          this.notificacionesService
+            .markAsRead(notificacion._id)
+            .subscribe(() => {
+              notificacion.is_read = true
+              this.notificacionesSinLeer--
+              this.filtrarNotificaciones(this.filtroActual)
+            })
+        }
+      },
+    })
   }
 
   // redirigirEntrada(notificacion: any): void {
