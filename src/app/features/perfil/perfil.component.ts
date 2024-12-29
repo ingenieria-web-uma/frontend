@@ -53,7 +53,9 @@ export class PerfilComponent implements OnInit {
   toggleNotificaciones(): void {
     if (this.user && this.user.id) {
       const newValue = !this.user.wantsEmailNotifications
-      this.usuarioService.updateWantsEmails(this.user.id, newValue).subscribe({
+      const updatedData = { wants_emails: newValue }
+
+      this.usuarioService.editUsuario(this.user.id, updatedData).subscribe({
         next: () => {
           if (this.user) {
             this.user.wantsEmailNotifications = newValue
